@@ -1,26 +1,165 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root, .dark {
+  --background: #0A0A0A;
+  --foreground: #FFFFFF;
+  
+  --card: #121212;
+  --card-foreground: #FFFFFF;
+  
+  --popover: #121212;
+  --popover-foreground: #FFFFFF;
+  
+  --primary: #D4AF37;
+  --primary-foreground: #0A0A0A;
+  
+  --secondary: #C0C0C0;
+  --secondary-foreground: #0A0A0A;
+  
+  --muted: #1A1A1A;
+  --muted-foreground: #A1A1AA;
+  
+  --accent: #27272A;
+  --accent-foreground: #FFFFFF;
+  
+  --border: #27272A;
+  --input: #27272A;
+  --ring: #D4AF37;
+  
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0A0A0A;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #D4AF37;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #F3E5AB;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@property --glow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes glow-rotation {
+  0% { --glow-angle: 0deg; }
+  100% { --glow-angle: 360deg; }
+}
+
+@layer utilities {
+  .glow-conic {
+    background: conic-gradient(
+      from var(--glow-angle),
+      var(--glow-color-1) 0%,
+      var(--glow-color-2) 10%,
+      var(--glow-color-3) 20%,
+      var(--glow-color-4) 30%,
+      var(--glow-color-5) 40%,
+      var(--glow-color-6) 50%,
+      var(--glow-color-7) 60%,
+      var(--glow-color-8) 70%,
+      var(--glow-color-9) 80%,
+      var(--glow-color-10) 90%,
+      var(--glow-color-1) 100%
+    );
+    animation: glow-rotation var(--glow-animation-duration) linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(calc(-33.333333% - 8px)); }
+  }
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+    width: max-content;
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37];
+  }
+  .text-gradient-silver {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#C0C0C0] via-[#E8E8E8] to-[#C0C0C0];
+  }
+  .bg-gradient-gold {
+    @apply bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37];
+  }
+  .glassmorphism {
+    @apply bg-black/40 backdrop-blur-md border border-white/10;
+  }
+  .glassmorphism-card {
+    @apply bg-[#121212]/80 backdrop-blur-lg border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 transition-colors duration-300;
+  }
+  .hover-gold {
+    @apply transition-all duration-300 hover:text-[#D4AF37] hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.8)];
+  }
+
+  .glow-border-overlay {
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 0px;
+    border-bottom: 0px;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
 }
