@@ -7,8 +7,8 @@ import { UploadCloud, PenLine } from "lucide-react";
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
-    mobile: "",
-    email: "",
+    phone: "",
+    material: "Mild Steel",
     productType: "Gates",
     dimensions: "",
     message: "",

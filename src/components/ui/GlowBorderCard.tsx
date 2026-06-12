@@ -14,7 +14,7 @@ export interface GlowBorderCardProps extends React.HTMLAttributes<HTMLDivElement
     borderWidth?: string;
     blurAmount?: string;
     inset?: string;
-    colorPreset?: 'nature' | 'ocean' | 'sunset' | 'aurora' | 'gold' | 'custom';
+    colorPreset?: 'nature' | 'ocean' | 'sunset' | 'aurora' | 'gold' | 'custom' | 'darkCenterLightEdges';
     paused?: boolean;
 }
 
