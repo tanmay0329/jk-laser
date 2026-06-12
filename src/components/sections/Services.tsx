@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Scissors, Layers, Sparkles, Hexagon, Shield } from "lucide-react";
+import Link from "next/link";
 
 const services = [
   {
@@ -115,9 +116,9 @@ export default function Services() {
                   ))}
                 </ul>
                 
-                <a href="#gallery" className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover-gold transition-colors group/btn mt-auto">
+                <Link href="/gallery" className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover-gold transition-colors group/btn mt-auto">
                   View Gallery <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                </a>
+                </Link>
               </div>
             </motion.div>
             );
@@ -125,9 +126,9 @@ export default function Services() {
         </div>
 
         <div className="mt-16 text-center">
-          <a href="#gallery" className="inline-flex items-center justify-center border border-primary text-primary px-8 py-3 rounded-sm font-semibold hover:bg-primary hover:text-black hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.6)] transition-all hover:scale-105">
+          <Link href="/gallery" className="inline-flex items-center justify-center border border-primary text-primary px-8 py-3 rounded-sm font-semibold hover:bg-primary hover:text-black hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.6)] transition-all hover:scale-105">
             VIEW ALL DESIGNS
-          </a>
+          </Link>
         </div>
       </div>
     </section>

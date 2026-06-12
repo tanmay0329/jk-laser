@@ -12,7 +12,7 @@ import GlowingDivider from "@/components/ui/GlowingDivider";
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-black">
       <Hero />
       <GlowingDivider />
       <Services />
@@ -26,6 +26,6 @@ export default function Home() {
       <Stats />
       <Testimonials />
       <ContactForm />
-    </>
+    </div>
   );
 }

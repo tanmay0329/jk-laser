@@ -47,8 +47,8 @@ export default async function ProcessPage({ params }: { params: Promise<{ slug: 
         </div>
         
         <div className="container relative z-10 mx-auto px-4 md:px-6">
-          <Link href="/#process" className="inline-flex items-center gap-2 text-primary hover-gold mb-6 transition-colors text-sm font-semibold tracking-widest uppercase">
-            <ArrowLeft size={16} /> Back to Process
+          <Link href="/" className="inline-flex items-center gap-2 text-primary hover-gold mb-6 transition-colors text-sm font-semibold tracking-widest uppercase">
+            <ArrowLeft size={16} /> Back to Home
           </Link>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-white/50 font-heading font-bold text-xl">{process.id}</span>

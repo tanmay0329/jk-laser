@@ -35,11 +35,18 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <h3 className="font-heading font-semibold text-lg text-white uppercase tracking-wider">Quick Links</h3>
             <ul className="flex flex-col gap-3">
-              {["About Us", "Design Gallery", "Materials", "Our Process", "Projects", "Contact Us"].map((link) => (
-                <li key={link}>
-                  <Link href={`#${link.toLowerCase().replace(" ", "-")}`} className="text-sm text-muted-foreground hover-gold transition-colors flex items-center gap-2">
+              {[
+                { name: "About Us", href: "/about" },
+                { name: "Design Gallery", href: "/gallery" },
+                { name: "Materials", href: "/materials" },
+                { name: "Our Process", href: "/process" },
+                { name: "Projects", href: "/projects" },
+                { name: "Contact Us", href: "/contact" },
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className="text-sm text-muted-foreground hover-gold transition-colors flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-primary rounded-full"></span>
-                    {link}
+                    {link.name}
                   </Link>
                 </li>
               ))}

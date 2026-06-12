@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp";
+import ScrollManager from "@/components/layout/ScrollManager";
 import "./globals.css";
 
 const inter = Inter({
@@ -33,6 +34,7 @@ export default function RootLayout({
       className={`dark ${inter.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden relative cursor-none md:cursor-none">
+        <ScrollManager />
         <CustomCursor />
         <Navbar />
         <main className="flex-1 w-full pt-[72px] md:pt-[88px]">{children}</main>
