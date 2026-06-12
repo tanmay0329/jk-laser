@@ -1,42 +1,41 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, Scissors, Layers, Sparkles, Hexagon, Shield } from "lucide-react";
 
 const services = [
   {
     id: "gates",
     title: "GATES",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
     items: ["Main Gates", "Safety Doors", "Compound Gates"],
     icon: "🚪",
   },
   {
     id: "railings",
     title: "RAILINGS",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
     items: ["Stair Railings", "Balcony Railings", "Terrace Railings"],
     icon: "🪜",
   },
   {
     id: "panels",
     title: "PANELS & SCREENS",
-    image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=800&auto=format&fit=crop",
     items: ["Wall Panels", "Room Dividers", "CNC Screens"],
     icon: "◨",
   },
   {
     id: "nameplates",
     title: "NAME PLATES",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop",
     items: ["House Name Plates", "Office Branding", "Logo Signages"],
     icon: "🏷️",
   },
   {
     id: "decorative",
     title: "DECORATIVE ITEMS",
-    image: "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?q=80&w=2130&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?q=80&w=800&auto=format&fit=crop",
     items: ["Wall Art", "Garden Decor", "Custom Items"],
     icon: "✨",
   },
@@ -44,7 +43,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 bg-[#0A0A0A] relative border-b border-white/5">
+    <section id="services" className="py-24 bg-[#0A0A0A] relative border-b border-white/5 overflow-hidden">
       {/* Decorative background element */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[20%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[100px]" />
@@ -82,13 +81,13 @@ export default function Services() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
               transition={{ 
-                duration: 0.7, 
-                delay: index * 0.15,
+                duration: 0.5, 
+                delay: index * 0.1,
                 type: "spring",
-                stiffness: 100,
-                damping: 15
+                stiffness: 120,
+                damping: 20
               }}
-              className="group relative flex flex-col bg-[#121212] border border-white/10 rounded-sm overflow-hidden hover:border-primary/50 transition-colors duration-500"
+              className="group relative flex flex-col bg-[#121212] border border-white/10 rounded-sm overflow-hidden hover:border-primary/50 transition-colors duration-500 will-change-transform transform-gpu"
             >
               <div className="relative h-48 md:h-56 w-full overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />

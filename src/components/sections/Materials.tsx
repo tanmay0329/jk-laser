@@ -7,49 +7,49 @@ const materials = [
   {
     id: "ms",
     name: "MILD STEEL",
-    image: "https://images.unsplash.com/photo-1535813547-99c456a41d4a?q=80&w=2070&auto=format&fit=crop", // placeholder
+    image: "https://images.unsplash.com/photo-1535813547-99c456a41d4a?q=80&w=800&auto=format&fit=crop", // placeholder
     benefits: ["Highly durable", "Cost-effective", "Excellent for powder coating"],
     recommended: "Main Gates, Boundary Grills",
   },
   {
     id: "ss",
     name: "STAINLESS STEEL",
-    image: "https://images.unsplash.com/photo-1620241608701-94ef138c7ec9?q=80&w=1964&auto=format&fit=crop", // placeholder
+    image: "https://images.unsplash.com/photo-1620241608701-94ef138c7ec9?q=80&w=800&auto=format&fit=crop", // placeholder
     benefits: ["Rust resistant", "Premium finish", "Low maintenance"],
     recommended: "Balcony Railings, Name Plates",
   },
   {
     id: "alu",
     name: "ALUMINIUM",
-    image: "https://images.unsplash.com/photo-1601625463688-662f95ebcc07?q=80&w=2070&auto=format&fit=crop", // placeholder
+    image: "https://images.unsplash.com/photo-1601625463688-662f95ebcc07?q=80&w=800&auto=format&fit=crop", // placeholder
     benefits: ["Lightweight", "Corrosion resistant", "Easy to install"],
     recommended: "Wall Panels, Room Dividers",
   },
   {
     id: "acp",
     name: "ACP SHEETS",
-    image: "https://images.unsplash.com/photo-1506461883276-594a12b11dc3?q=80&w=2070&auto=format&fit=crop", // placeholder
-    benefits: ["Weather proof", "Various color options", "Modern look"],
-    recommended: "Elevation, Commercial Signages",
+    image: "https://images.unsplash.com/photo-1506461883276-594a12b11dc3?q=80&w=800&auto=format&fit=crop", // placeholder
+    benefits: ["Weather resistant", "Wide color range", "Modern look"],
+    recommended: "Exterior Elevation, Corporate Signage",
   },
 ];
 
 export default function Materials() {
   return (
-    <section id="materials" className="py-24 bg-[#050505] relative border-b border-white/5">
+    <section id="materials" className="py-24 bg-[#050505] relative border-b border-white/5 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-left mb-12"
+          className="text-center md:text-left mb-12"
         >
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2 uppercase tracking-wide">
             MATERIALS WE <span className="text-primary">WORK WITH</span>
           </h2>
-          <div className="h-px w-24 bg-primary mb-6"></div>
-          <p className="text-muted-foreground max-w-3xl text-sm md:text-base">
+          <div className="h-px w-24 bg-primary mb-6 mx-auto md:mx-0"></div>
+          <p className="text-muted-foreground max-w-3xl mx-auto md:mx-0 text-sm md:text-base">
             We use only premium grade materials sourced from trusted suppliers to ensure longevity and perfect finish for all our products.
           </p>
         </motion.div>
@@ -64,13 +64,13 @@ export default function Materials() {
               whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
               viewport={{ once: false, amount: 0.2 }}
               transition={{ 
-                duration: 0.7, 
-                delay: index * 0.15,
+                duration: 0.5, 
+                delay: index * 0.1,
                 type: "spring",
-                stiffness: 100,
-                damping: 15
+                stiffness: 120,
+                damping: 20
               }}
-              className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] flex flex-col"
+              className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] flex flex-col will-change-transform transform-gpu"
             >
               <div className="h-40 overflow-hidden relative">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 z-10" />

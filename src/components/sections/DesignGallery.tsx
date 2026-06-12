@@ -7,14 +7,14 @@ import { section } from "framer-motion/client";
 
 // Mock data for the gallery
 const galleryItems = [
-  { id: 1, category: "Gates", designNumber: "G001", image: "https://images.unsplash.com/photo-1598228723793-52759bba239c?q=80&w=1974&auto=format&fit=crop" },
-  { id: 2, category: "Gates", designNumber: "G002", image: "https://images.unsplash.com/photo-1592398516082-95f7c327dc45?q=80&w=2070&auto=format&fit=crop" },
-  { id: 3, category: "Railings", designNumber: "R101", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" },
-  { id: 4, category: "Panels", designNumber: "P201", image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2070&auto=format&fit=crop" },
-  { id: 5, category: "Panels", designNumber: "P202", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop" },
-  { id: 6, category: "Name Plates", designNumber: "N301", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop" },
-  { id: 7, category: "Decorative Art", designNumber: "D401", image: "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?q=80&w=2130&auto=format&fit=crop" },
-  { id: 8, category: "Gates", designNumber: "G003", image: "https://images.unsplash.com/photo-1565511394784-0cc0c4bb2101?q=80&w=2070&auto=format&fit=crop" },
+  { id: 1, category: "Gates", designNumber: "G001", image: "https://images.unsplash.com/photo-1598228723793-52759bba239c?q=80&w=800&auto=format&fit=crop" },
+  { id: 2, category: "Gates", designNumber: "G002", image: "https://images.unsplash.com/photo-1592398516082-95f7c327dc45?q=80&w=800&auto=format&fit=crop" },
+  { id: 3, category: "Railings", designNumber: "R101", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" },
+  { id: 4, category: "Panels", designNumber: "P201", image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=800&auto=format&fit=crop" },
+  { id: 5, category: "Panels", designNumber: "P202", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop" },
+  { id: 6, category: "Name Plates", designNumber: "N301", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop" },
+  { id: 7, category: "Decorative Art", designNumber: "D401", image: "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?q=80&w=800&auto=format&fit=crop" },
+  { id: 8, category: "Gates", designNumber: "G003", image: "https://images.unsplash.com/photo-1565511394784-0cc0c4bb2101?q=80&w=800&auto=format&fit=crop" },
 ];
 
 const categories = ["All", "Gates", "Railings", "Panels", "Name Plates", "Decorative Art"];
@@ -107,14 +107,14 @@ export default function DesignGallery() {
                 viewport={{ once: false, amount: 0.2, margin: "-50px" }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ 
-                  duration: 0.7, 
-                  delay: index * 0.1,
+                  duration: 0.5, 
+                  delay: index * 0.05,
                   type: "spring",
-                  stiffness: 100,
-                  damping: 15
+                  stiffness: 120,
+                  damping: 20
                 }}
                 key={item.id}
-                className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] aspect-[3/4]"
+                className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] aspect-[3/4] will-change-transform transform-gpu"
               >
                 <img
                   src={item.image}

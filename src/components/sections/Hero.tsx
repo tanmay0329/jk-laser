@@ -77,7 +77,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-6 text-center md:text-left items-center md:items-start"
           >
             <div className="inline-flex items-center gap-2 border border-primary/30 bg-primary/10 rounded-full px-4 py-1.5 w-max backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
@@ -94,7 +94,7 @@ export default function Hero() {
               We create elegant laser-cut gates, railings, decorative panels, name plates and custom metal artwork with unmatched precision and perfect finish.
             </p>
             
-            <div className="flex flex-wrap items-center gap-4 mt-4">
+            <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 mt-4 w-full md:w-auto">
               <Link href="#gallery" className="group relative inline-flex items-center justify-center gap-2 bg-gradient-gold text-black px-8 py-4 rounded-sm font-bold text-sm tracking-wide overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:scale-105">
                 <span className="relative z-10 flex items-center gap-2">
                   VIEW DESIGNS <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />

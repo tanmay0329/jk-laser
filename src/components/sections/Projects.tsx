@@ -7,28 +7,32 @@ const projects = [
   {
     id: 1,
     title: "Luxury Villa Main Gate",
-    beforeImage: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop&blur=10", // Using blurry/different as 'before' approximation
-    afterImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+    client: "R.K. Architects",
+    description: "A dual-layer mild steel gate with custom geometric cuts and gold powder coating.",
+    beforeImage: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop&blur=10",
+    afterImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
+    tags: ["Gates", "Mild Steel", "Powder Coated"],
     material: "Mild Steel (12mm) + Powder Coating",
     location: "Jalna Road, Beed",
-    date: "March 2024",
-    description: "Replaced an old wooden gate with a custom tree-of-life laser cut design, enhancing both security and aesthetics."
+    date: "March 2024"
   },
   {
     id: 2,
-    title: "Modern Apartment Balcony",
-    beforeImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop&blur=10",
-    afterImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2070&auto=format&fit=crop",
+    title: "Corporate Office Facade",
+    client: "TechPark Solutions",
+    description: "Intricate stainless steel facade panels covering 1200 sq ft, installed with zero-tolerance precision.",
+    beforeImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop&blur=10",
+    afterImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=800&auto=format&fit=crop",
+    tags: ["Panels", "Stainless Steel", "Commercial"],
     material: "Stainless Steel (304 grade)",
     location: "Shivaji Nagar, Pune",
-    date: "January 2024",
-    description: "Installed a sleek geometric pattern railing that provides safety while allowing maximum light and airflow."
+    date: "January 2024"
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 bg-[#050505] relative">
+    <section id="projects" className="py-24 bg-[#050505] relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <motion.div 
@@ -36,9 +40,9 @@ export default function Projects() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-2xl"
+            className="max-w-2xl text-center md:text-left"
           >
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex items-center justify-center md:justify-start gap-4 mb-4">
               <span className="text-primary font-heading font-semibold tracking-widest text-sm uppercase">Transformations</span>
               <div className="h-px w-24 bg-gradient-to-r from-primary to-transparent"></div>
             </div>
@@ -49,7 +53,7 @@ export default function Projects() {
               See how our laser cut designs transform ordinary spaces into extraordinary ones. Hover over the projects to see the details and before/after transition.
             </p>
           </motion.div>
-          <a href="#contact" className="shrink-0 inline-flex items-center justify-center gap-2 text-primary hover-gold transition-colors uppercase tracking-widest text-sm font-bold group">
+          <a href="#contact" className="mx-auto md:mx-0 shrink-0 inline-flex items-center justify-center gap-2 text-primary hover-gold transition-colors uppercase tracking-widest text-sm font-bold group">
             Start Your Project
             <ArrowLeftRight size={16} className="group-hover:rotate-180 transition-transform duration-500" />
           </a>
@@ -65,13 +69,13 @@ export default function Projects() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
               transition={{ 
-                duration: 0.7, 
-                delay: index * 0.15,
+                duration: 0.5, 
+                delay: index * 0.1,
                 type: "spring",
-                stiffness: 100,
-                damping: 15
+                stiffness: 120,
+                damping: 20
               }}
-              className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212]"
+              className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] will-change-transform transform-gpu"
             >
               <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
                 {/* Before Image */}

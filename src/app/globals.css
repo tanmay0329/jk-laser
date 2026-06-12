@@ -69,6 +69,8 @@
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    scrollbar-color: #D4AF37 #0A0A0A;
+    scrollbar-width: thin;
   }
   
   h1, h2, h3, h4, h5, h6 {
