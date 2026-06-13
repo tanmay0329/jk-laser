@@ -3,46 +3,66 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Scissors, Layers, Sparkles, Hexagon, Shield } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const services = [
+const defaultServices = [
   {
-    id: "gates",
-    title: "GATES",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
-    items: ["Main Gates", "Safety Doors", "Compound Gates"],
-    icon: "🚪",
+    id: "building-elevation",
+    title: "BUILDING ELEVATION DESIGN",
+    filterName: "Building Elevation Design",
+    image: "/images/services/elevation-designs.jpg",
+    items: ["Commercial Exteriors", "Residential Facades", "Modern Elevations"],
+    icon: "🏢",
   },
   {
-    id: "railings",
-    title: "RAILINGS",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
-    items: ["Stair Railings", "Balcony Railings", "Terrace Railings"],
-    icon: "🪜",
-  },
-  {
-    id: "panels",
-    title: "PANELS & SCREENS",
-    image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=800&auto=format&fit=crop",
-    items: ["Wall Panels", "Room Dividers", "CNC Screens"],
+    id: "elevation-design",
+    title: "ELEVATION DESIGN",
+    filterName: "Elevation Design",
+    image: "/images/services/elevation-designs.jpg",
+    items: ["Wall Panels", "CNC Screens", "Room Dividers"],
     icon: "◨",
   },
   {
-    id: "nameplates",
-    title: "NAME PLATES",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop",
-    items: ["House Name Plates", "Office Branding", "Logo Signages"],
-    icon: "🏷️",
+    id: "door",
+    title: "DOOR",
+    filterName: "Door",
+    image: "/images/services/gates-doors.jpg",
+    items: ["Safety Doors", "Main Doors", "Custom Laser Doors"],
+    icon: "🚪",
   },
   {
-    id: "decorative",
-    title: "DECORATIVE ITEMS",
-    image: "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?q=80&w=800&auto=format&fit=crop",
-    items: ["Wall Art", "Garden Decor", "Custom Items"],
+    id: "gates",
+    title: "GATES",
+    filterName: "Gates",
+    image: "/images/services/gates-doors.jpg",
+    items: ["Main Gates", "Compound Gates", "Sliding Gates"],
+    icon: "⛩️",
+  },
+  {
+    id: "grill",
+    title: "GRILL",
+    filterName: "Grill",
+    image: "/images/services/grills.jpg",
+    items: ["Window Grills", "Balcony Grills", "Safety Grills"],
+    icon: "🪟",
+  },
+  {
+    id: "wall-art",
+    title: "WALL ART",
+    filterName: "Wall Art",
+    image: "/images/services/wall-art.jpg",
+    items: ["Interior Wall Art", "Metal Wall Decor", "Custom Art"],
     icon: "✨",
   },
 ];
 
-export default function Services() {
+interface ServicesProps {
+  categoryThumbnails?: Record<string, string>;
+}
+
+export default function Services({ categoryThumbnails = {} }: ServicesProps) {
+  const router = useRouter();
+
   return (
     <section id="services" className="py-24 bg-[#0A0A0A] relative border-b border-white/5 overflow-hidden">
       {/* Decorative background element */}
@@ -72,15 +92,17 @@ export default function Services() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          {services.map((service, index) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {defaultServices.map((service, index) => {
             const initialX = index % 2 === 0 ? -50 : 50;
+            const displayImage = categoryThumbnails[service.title] || service.image;
             return (
             <motion.div
               key={service.id}
               initial={{ opacity: 0, x: initialX, y: 20 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
+              onClick={() => router.push(`/gallery?category=${encodeURIComponent(service.filterName)}`)}
               transition={{ 
                 duration: 0.5, 
                 delay: index * 0.1,
@@ -88,12 +110,12 @@ export default function Services() {
                 stiffness: 120,
                 damping: 20
               }}
-              className="group relative flex flex-col bg-[#121212] border border-white/10 rounded-sm overflow-hidden hover:border-primary/50 transition-colors duration-500 will-change-transform transform-gpu"
+              className="group relative flex flex-col bg-[#121212] border border-white/10 rounded-sm overflow-hidden hover:border-primary/50 transition-colors duration-500 will-change-transform transform-gpu cursor-pointer"
             >
               <div className="relative h-48 md:h-56 w-full overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
                 <img
-                  src={service.image}
+                  src={displayImage}
                   alt={service.title}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
@@ -116,9 +138,9 @@ export default function Services() {
                   ))}
                 </ul>
                 
-                <Link href="/gallery" className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover-gold transition-colors group/btn mt-auto">
+                <span className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover-gold transition-colors group/btn mt-auto">
                   View Gallery <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                </Link>
+                </span>
               </div>
             </motion.div>
             );

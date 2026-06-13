@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ChevronRight, FileText } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -30,16 +30,30 @@ const Sparkle = ({ delay }: { delay: number }) => (
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const heroImages = [
+    "/images/slider/laser_cutting_1.png",
+    "/images/slider/mesh_pattern.png",
+    "/images/slider/laser_cutting_2.png",
+    "/images/slider/facade_1.png",
+    "/images/slider/laser_cutting_3.png",
+    "/images/slider/macro_1.png"
+  ];
   
   useEffect(() => {
     setMounted(true);
-  }, []);
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
 
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 1000], ["0%", "50%"]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative overflow-hidden pt-24 pb-16 lg:pt-28 lg:pb-20">
       {/* Background Video with Overlay */}
       <motion.div 
         className="absolute inset-0 z-0 bg-[#0A0A0A]"
@@ -95,7 +109,7 @@ export default function Hero() {
             </p>
             
             <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 mt-4 w-full md:w-auto">
-              <Link href="#gallery" className="group relative inline-flex items-center justify-center gap-2 bg-gradient-gold text-black px-8 py-4 rounded-sm font-bold text-sm tracking-wide overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:scale-105">
+              <Link href="/gallery" className="group relative inline-flex items-center justify-center gap-2 bg-gradient-gold text-black px-8 py-4 rounded-sm font-bold text-sm tracking-wide overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:scale-105">
                 <span className="relative z-10 flex items-center gap-2">
                   VIEW DESIGNS <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -131,11 +145,21 @@ export default function Hero() {
               <div className="absolute top-0 right-0 w-24 h-24 border-t-2 border-r-2 border-primary -translate-y-2 translate-x-2" />
               <div className="absolute bottom-0 left-0 w-24 h-24 border-b-2 border-l-2 border-primary translate-y-2 -translate-x-2" />
               
-              <div className="w-full h-[60%] border border-white/20 bg-black/60 overflow-hidden relative">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1565511394784-0cc0c4bb2101?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-overlay"></div>
+              <div className="w-full h-[60%] border border-white/20 bg-black overflow-hidden relative">
+                <AnimatePresence mode="popLayout">
+                  <motion.div 
+                    key={currentImageIndex}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 0.9, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url('${heroImages[currentImageIndex]}')` }}
+                  />
+                </AnimatePresence>
                 {/* Decorative Laser Cut Pattern Overlay - pure CSS representation */}
-                <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_45%,#D4AF37_49%,#D4AF37_51%,transparent_55%)] bg-[size:20px_20px] opacity-20"></div>
-                <div className="absolute inset-0 bg-[linear-gradient(-45deg,transparent_45%,#D4AF37_49%,#D4AF37_51%,transparent_55%)] bg-[size:20px_20px] opacity-20"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_45%,#D4AF37_49%,#D4AF37_51%,transparent_55%)] bg-[size:20px_20px] opacity-[0.15] pointer-events-none z-10"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(-45deg,transparent_45%,#D4AF37_49%,#D4AF37_51%,transparent_55%)] bg-[size:20px_20px] opacity-[0.15] pointer-events-none z-10"></div>
               </div>
               
               <div className="space-y-4">

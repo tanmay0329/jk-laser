@@ -1,28 +1,46 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Search, ZoomIn, X } from "lucide-react";
-import { section } from "framer-motion/client";
+import { Search, ZoomIn, X, ChevronDown } from "lucide-react";
 
-// Mock data for the gallery
-const galleryItems = [
-  { id: 1, category: "Gates", designNumber: "G001", image: "https://images.unsplash.com/photo-1598228723793-52759bba239c?q=80&w=800&auto=format&fit=crop" },
-  { id: 2, category: "Gates", designNumber: "G002", image: "https://images.unsplash.com/photo-1592398516082-95f7c327dc45?q=80&w=800&auto=format&fit=crop" },
-  { id: 3, category: "Railings", designNumber: "R101", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" },
-  { id: 4, category: "Panels", designNumber: "P201", image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=800&auto=format&fit=crop" },
-  { id: 5, category: "Panels", designNumber: "P202", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop" },
-  { id: 6, category: "Name Plates", designNumber: "N301", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop" },
-  { id: 7, category: "Decorative Art", designNumber: "D401", image: "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?q=80&w=800&auto=format&fit=crop" },
-  { id: 8, category: "Gates", designNumber: "G003", image: "https://images.unsplash.com/photo-1565511394784-0cc0c4bb2101?q=80&w=800&auto=format&fit=crop" },
+export interface GalleryItem {
+  id: string;
+  category: string;
+  designNumber: string;
+  image: string;
+}
+
+interface DesignGalleryProps {
+  initialItems?: GalleryItem[];
+}
+
+const categories = [
+  "All", 
+  "Building Elevation Design", 
+  "Elevation Design", 
+  "Door", 
+  "Gates", 
+  "Grill", 
+  "Wall Art"
 ];
+const ITEMS_PER_PAGE = 20;
 
-const categories = ["All", "Gates", "Railings", "Panels", "Name Plates", "Decorative Art"];
-
-export default function DesignGallery() {
+export default function DesignGallery({ initialItems = [] }: DesignGalleryProps) {
   const [filter, setFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [lightboxImage, setLightboxImage] = useState<{url: string, number: string} | null>(null);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const categoryParam = params.get("category");
+      if (categoryParam && categories.includes(categoryParam)) {
+        setFilter(categoryParam);
+      }
+    }
+  }, []);
 
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -31,11 +49,41 @@ export default function DesignGallery() {
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
 
-  const filteredItems = galleryItems.filter(item => {
-    const matchesCategory = filter === "All" || item.category === filter;
-    const matchesSearch = item.designNumber.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const handleFilterChange = (cat: string) => {
+    setFilter(cat);
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
+  const filteredItems = useMemo(() => {
+    let itemsToFilter = [...initialItems];
+    
+    // Deterministically shuffle items when "All" is selected so they are mixed up nicely
+    if (filter === "All") {
+      itemsToFilter.sort((a, b) => {
+        let hashA = 0; for(let i=0; i<a.id.length; i++) hashA = Math.imul(31, hashA) + a.id.charCodeAt(i) | 0;
+        let hashB = 0; for(let i=0; i<b.id.length; i++) hashB = Math.imul(31, hashB) + b.id.charCodeAt(i) | 0;
+        return hashA - hashB;
+      });
+    }
+
+    return itemsToFilter.filter(item => {
+      const matchesCategory = filter === "All" || item.category === filter;
+      const matchesSearch = item.designNumber.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [initialItems, filter, searchQuery]);
+
+  const visibleItems = filteredItems.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredItems.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + ITEMS_PER_PAGE);
+  };
 
   return (
     <section ref={containerRef} id="gallery" className="py-24 bg-black relative overflow-hidden">
@@ -69,7 +117,7 @@ export default function DesignGallery() {
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setFilter(cat)}
+                  onClick={() => handleFilterChange(cat)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     filter === cat 
                       ? "bg-primary text-black" 
@@ -87,7 +135,7 @@ export default function DesignGallery() {
                 type="text"
                 placeholder="Search design (e.g. G001)"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
                 className="w-full bg-[#121212] border border-white/20 rounded-full px-5 py-2.5 text-sm text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all pr-10"
               />
               <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40" size={16} />
@@ -97,18 +145,17 @@ export default function DesignGallery() {
         {/* Gallery Grid - Masonry style approximation using columns */}
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <AnimatePresence>
-            {filteredItems.map((item, index) => {
+            {visibleItems.map((item, index) => {
               const initialX = index % 2 === 0 ? -50 : 50;
               return (
               <motion.div
                 layout
                 initial={{ opacity: 0, x: initialX, scale: 0.9 }}
                 whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                viewport={{ once: false, amount: 0.2, margin: "-50px" }}
+                viewport={{ once: true, amount: 0.1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ 
                   duration: 0.5, 
-                  delay: index * 0.05,
                   type: "spring",
                   stiffness: 120,
                   damping: 20
@@ -144,7 +191,18 @@ export default function DesignGallery() {
 
         {filteredItems.length === 0 && (
           <div className="text-center py-20 text-muted-foreground">
-            No designs found matching your search.
+            No designs found matching your criteria.
+          </div>
+        )}
+
+        {hasMore && (
+          <div className="mt-16 text-center">
+            <button 
+              onClick={handleLoadMore}
+              className="inline-flex items-center gap-2 border border-primary/50 hover:border-primary text-white px-8 py-3 rounded-full font-medium transition-all hover:bg-primary/10"
+            >
+              Load More <ChevronDown size={18} className="text-primary" />
+            </button>
           </div>
         )}
       </div>
@@ -182,6 +240,5 @@ export default function DesignGallery() {
         )}
       </AnimatePresence>
     </section>
-    
   );
 }
