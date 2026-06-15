@@ -17,12 +17,12 @@ interface DesignGalleryProps {
 
 const categories = [
   "All", 
-  "Building Elevation Design", 
-  "Elevation Design", 
-  "Door", 
-  "Gates", 
-  "Grill", 
-  "Wall Art"
+  "JK Building Elevation Design", 
+  "JK Elevation Design", 
+  "JK Door", 
+  "JK Gates", 
+  "JK Grill", 
+  "JK Wall Art"
 ];
 const ITEMS_PER_PAGE = 20;
 
@@ -62,15 +62,6 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
   const filteredItems = useMemo(() => {
     let itemsToFilter = [...initialItems];
     
-    // Deterministically shuffle items when "All" is selected so they are mixed up nicely
-    if (filter === "All") {
-      itemsToFilter.sort((a, b) => {
-        let hashA = 0; for(let i=0; i<a.id.length; i++) hashA = Math.imul(31, hashA) + a.id.charCodeAt(i) | 0;
-        let hashB = 0; for(let i=0; i<b.id.length; i++) hashB = Math.imul(31, hashB) + b.id.charCodeAt(i) | 0;
-        return hashA - hashB;
-      });
-    }
-
     return itemsToFilter.filter(item => {
       const matchesCategory = filter === "All" || item.category === filter;
       const matchesSearch = item.designNumber.toLowerCase().includes(searchQuery.toLowerCase());
@@ -142,8 +133,8 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
             </div>
           </div>
 
-        {/* Gallery Grid - Masonry style approximation using columns */}
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Gallery Grid - Pinterest Masonry style using CSS columns */}
+        <motion.div layout className="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-6">
           <AnimatePresence>
             {visibleItems.map((item, index) => {
               const initialX = index % 2 === 0 ? -50 : 50;
@@ -161,14 +152,24 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                   damping: 20
                 }}
                 key={item.id}
-                className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] aspect-[3/4] will-change-transform transform-gpu"
+                className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] mb-3 md:mb-6 break-inside-avoid will-change-transform transform-gpu block cursor-pointer"
+                onClick={() => setLightboxImage({ url: item.image, number: item.designNumber })}
               >
                 <img
                   src={item.image}
                   alt={`Design ${item.designNumber}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110 select-none"
                   loading="lazy"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                 />
+                
+                {/* Image Watermark */}
+                <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10">
+                  <span className="text-white/30 font-heading font-black text-4xl sm:text-5xl lg:text-3xl transform -rotate-[30deg] tracking-widest whitespace-nowrap select-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                    JK LASER
+                  </span>
+                </div>
                 
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4">
@@ -227,11 +228,21 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
               className="relative max-w-5xl w-full max-h-full flex flex-col items-center gap-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <img 
-                src={lightboxImage.url} 
-                alt={lightboxImage.number} 
-                className="max-w-full max-h-[80vh] object-contain rounded-sm border border-white/20"
-              />
+              <div className="relative max-w-full flex justify-center">
+                <img 
+                  src={lightboxImage.url} 
+                  alt={lightboxImage.number} 
+                  className="max-w-full max-h-[80vh] object-contain rounded-sm border border-white/20 relative z-10 select-none"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                />
+                {/* Lightbox Watermark */}
+                <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-20 mix-blend-overlay">
+                  <span className="text-white/40 font-heading font-black text-[10vw] sm:text-[6rem] transform -rotate-[30deg] tracking-widest whitespace-nowrap select-none drop-shadow-lg">
+                    JK LASER BEED
+                  </span>
+                </div>
+              </div>
               <div className="bg-black/80 px-6 py-2 rounded-full border border-primary/30">
                 <p className="text-primary font-heading font-bold text-lg">Design: {lightboxImage.number}</p>
               </div>

@@ -19,18 +19,11 @@ const materials = [
     recommended: "Balcony Railings, Name Plates",
   },
   {
-    id: "alu",
-    name: "ALUMINIUM",
-    image: "https://images.unsplash.com/photo-1601625463688-662f95ebcc07?q=80&w=800&auto=format&fit=crop", // placeholder
-    benefits: ["Lightweight", "Corrosion resistant", "Easy to install"],
-    recommended: "Wall Panels, Room Dividers",
-  },
-  {
-    id: "acp",
-    name: "ACP SHEETS",
-    image: "https://images.unsplash.com/photo-1506461883276-594a12b11dc3?q=80&w=800&auto=format&fit=crop", // placeholder
-    benefits: ["Weather resistant", "Wide color range", "Modern look"],
-    recommended: "Exterior Elevation, Corporate Signage",
+    id: "gold-plated",
+    name: "GOLD PLATED METAL",
+    image: "/images/gold_metal.png", // Custom generated high-res gold texture
+    benefits: ["Luxurious look", "Tarnish resistant", "Extremely elegant"],
+    recommended: "Interior Decor, Custom Artwork, Name Plates",
   },
 ];
 
@@ -46,7 +39,7 @@ export default function Materials() {
           className="text-center md:text-left mb-12"
         >
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2 uppercase tracking-wide">
-            MATERIALS WE <span className="text-primary">WORK WITH</span>
+            MATERIALS JK <span className="text-primary">WORK WITH</span>
           </h2>
           <div className="h-px w-24 bg-primary mb-6 mx-auto md:mx-0"></div>
           <p className="text-muted-foreground max-w-3xl mx-auto md:mx-0 text-sm md:text-base">
@@ -54,7 +47,7 @@ export default function Materials() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {materials.map((material, index) => {
             const initialX = index % 2 === 0 ? -50 : 50;
             return (
@@ -73,11 +66,11 @@ export default function Materials() {
               className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] flex flex-col will-change-transform transform-gpu"
             >
               <div className="h-40 overflow-hidden relative">
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                <div className="absolute inset-0 bg-black/40 md:group-hover:bg-transparent transition-colors duration-500 z-10 hidden md:block" />
                 <img 
                   src={material.image} 
                   alt={material.name}
-                  className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transform group-hover:scale-110 transition-all duration-700"
+                  className="w-full h-full object-cover filter md:grayscale md:group-hover:grayscale-0 transform md:group-hover:scale-110 transition-all duration-700"
                 />
                 <div className="absolute bottom-0 left-0 w-full p-4 z-20 bg-gradient-to-t from-black to-transparent">
                   <h3 className="font-heading text-xl font-bold text-white tracking-widest uppercase">{material.name}</h3>

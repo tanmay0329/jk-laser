@@ -75,6 +75,20 @@ export default function Hero() {
       {/* Gold glowing accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
 
+      {/* Background Watermark Logo */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
+        {/* Desktop Banner Logo */}
+        <img 
+          src="/jk-laser-banner.png" 
+          alt="Watermark Desktop" 
+          className="hidden md:block w-full h-full object-cover filter grayscale opacity-10 mix-blend-overlay"
+        />
+        {/* Mobile Background Text */}
+        <div className="block md:hidden text-[90vw] font-heading font-black text-transparent bg-clip-text bg-gradient-to-b from-[#D4AF37] via-[#FFF8D6] to-[#AA7700] opacity-30 leading-none tracking-tighter select-none drop-shadow-[0_0_40px_rgba(212,175,55,0.3)] transform -translate-y-45">
+          JK
+        </div>
+      </div>
+
       {/* Sparks */}
       {mounted && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
@@ -100,7 +114,7 @@ export default function Hero() {
             
             <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
               PRECISION <br />
-              <span className="text-gradient-gold">LASER CUTTING</span> <br />
+              <span className="text-gradient-gold">JK LASER CUTTING</span> <br />
               & CUSTOM DESIGN
             </h1>
             
@@ -126,7 +140,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.2 }}
-            className="flex justify-center perspective-[1000px] mt-8 lg:mt-0"
+            className="flex justify-center perspective-[1000px] mt-24 lg:mt-0"
           >
             {/* 3D Floating Element */}
             <motion.div
@@ -163,7 +177,7 @@ export default function Hero() {
               </div>
               
               <div className="space-y-4">
-                <h3 className="font-heading text-2xl text-primary font-semibold">Bespoke Designs</h3>
+                <h3 className="font-heading text-2xl text-primary font-semibold">Custom Designs</h3>
                 <p className="text-sm text-white/70 line-clamp-3">
                   Our advanced CNC laser technology allows us to create intricate, complex patterns that transform ordinary metal into extraordinary architectural features.
                 </p>

@@ -126,7 +126,7 @@ export default function Projects() {
               <div className="h-px w-24 bg-gradient-to-r from-primary to-transparent"></div>
             </div>
             <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-6">
-              FEATURED <span className="text-primary">PROJECTS</span>
+              FEATURED J<span className="text-primary">K PROJECTS</span>
             </h2>
             <p className="text-muted-foreground text-sm md:text-base">
               See how our laser cut designs transform ordinary spaces into extraordinary ones. Hover over the projects to see the details and before/after transition.

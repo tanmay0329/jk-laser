@@ -2,7 +2,7 @@ export const processData = [
   {
     id: "01",
     slug: "design-selection",
-    title: "DESIGN SELECTION",
+    title: "JK DESIGN SELECTION",
     shortDescription: "Choose from our wide range of designs or share your idea.",
     fullDescription: "Every masterpiece begins with an idea. At JK Laser Beed, we offer an extensive catalog of premium, readymade geometric, floral, and contemporary designs. Alternatively, bring us your sketches, references, or raw concepts, and our expert team will help you refine them into an actionable blueprint for fabrication.",
     features: [
@@ -18,7 +18,7 @@ export const processData = [
   {
     id: "02",
     slug: "cad-drawing",
-    title: "CAD DRAWING",
+    title: "JK CAD DRAWING",
     shortDescription: "We create precise CAD drawings for perfect execution.",
     fullDescription: "Precision is our hallmark. Once the design is finalized, our expert draftsmen translate it into highly detailed Computer-Aided Design (CAD) files. These digital blueprints map out every cut down to the millimeter, ensuring that the final physical product perfectly matches your vision and the architectural requirements of your space.",
     features: [
@@ -35,7 +35,7 @@ export const processData = [
   {
     id: "03",
     slug: "laser-cutting",
-    title: "LASER CUTTING",
+    title: "JK LASER CUTTING",
     shortDescription: "High precision laser cutting for perfect accuracy.",
     fullDescription: "Using state-of-the-art CNC Fiber Laser machines, we slice through solid metal with unparalleled speed and accuracy. The laser beam vaporizes the material, leaving behind exceptionally clean edges that require minimal post-processing. This technology allows us to create breathtakingly intricate patterns that traditional fabrication simply cannot achieve.",
     features: [
@@ -52,7 +52,7 @@ export const processData = [
   {
     id: "04",
     slug: "finishing",
-    title: "FINISHING",
+    title: "JK FINISHING",
     shortDescription: "Polishing, coating & quality check for perfect finish.",
     fullDescription: "A luxurious product demands a flawless finish. After cutting, every piece undergoes rigorous quality control. We deburr, polish, and treat the metal to protect against rust and weathering. Finally, we apply premium powder coating, PU painting, or metallic plating to achieve the exact aesthetic you desire, whether it's matte black, brushed steel, or opulent gold.",
     features: [
@@ -69,7 +69,7 @@ export const processData = [
   {
     id: "05",
     slug: "installation",
-    title: "INSTALLATION",
+    title: "JK INSTALLATION",
     shortDescription: "Professional installation at your location.",
     fullDescription: "We don't just hand you a product; we ensure it's integrated perfectly into your space. Our skilled installation team handles the heavy lifting, precise alignment, and secure mounting of your custom metalwork. We work cleanly, efficiently, and safely to bring the project to its stunning completion right before your eyes.",
     features: [

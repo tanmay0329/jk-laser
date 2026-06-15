@@ -24,7 +24,7 @@ export default function Process() {
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary"></div>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-white tracking-widest">
-              OUR <span className="text-primary">PROCESS</span>
+              JK <span className="text-primary">PROCESS</span>
             </h2>
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary"></div>
           </div>

@@ -8,48 +8,48 @@ import { useRouter } from "next/navigation";
 const defaultServices = [
   {
     id: "building-elevation",
-    title: "BUILDING ELEVATION DESIGN",
-    filterName: "Building Elevation Design",
+    title: "JK BUILDING ELEVATION DESIGN",
+    filterName: "JK Building Elevation Design",
     image: "/images/services/elevation-designs.jpg",
     items: ["Commercial Exteriors", "Residential Facades", "Modern Elevations"],
     icon: "🏢",
   },
   {
     id: "elevation-design",
-    title: "ELEVATION DESIGN",
-    filterName: "Elevation Design",
+    title: "JK ELEVATION DESIGN",
+    filterName: "JK Elevation Design",
     image: "/images/services/elevation-designs.jpg",
     items: ["Wall Panels", "CNC Screens", "Room Dividers"],
     icon: "◨",
   },
   {
     id: "door",
-    title: "DOOR",
-    filterName: "Door",
+    title: "JK DOOR",
+    filterName: "JK Door",
     image: "/images/services/gates-doors.jpg",
     items: ["Safety Doors", "Main Doors", "Custom Laser Doors"],
     icon: "🚪",
   },
   {
     id: "gates",
-    title: "GATES",
-    filterName: "Gates",
+    title: "JK GATES",
+    filterName: "JK Gates",
     image: "/images/services/gates-doors.jpg",
     items: ["Main Gates", "Compound Gates", "Sliding Gates"],
     icon: "⛩️",
   },
   {
     id: "grill",
-    title: "GRILL",
-    filterName: "Grill",
+    title: "JK GRILL",
+    filterName: "JK Grill",
     image: "/images/services/grills.jpg",
     items: ["Window Grills", "Balcony Grills", "Safety Grills"],
     icon: "🪟",
   },
   {
     id: "wall-art",
-    title: "WALL ART",
-    filterName: "Wall Art",
+    title: "JK WALL ART",
+    filterName: "JK Wall Art",
     image: "/images/services/wall-art.jpg",
     items: ["Interior Wall Art", "Metal Wall Decor", "Custom Art"],
     icon: "✨",
@@ -85,7 +85,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary"></div>
           </div>
           <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-6">
-            OUR <span className="text-primary">SERVICES</span>
+            JK <span className="text-primary">SERVICES</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
             From monumental entrance gates to delicate interior screens, our precision laser cutting services cover a wide spectrum of architectural and decorative needs.
@@ -112,12 +112,24 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
               }}
               className="group relative flex flex-col bg-[#121212] border border-white/10 rounded-sm overflow-hidden hover:border-primary/50 transition-colors duration-500 will-change-transform transform-gpu cursor-pointer"
             >
-              <div className="relative h-48 md:h-56 w-full overflow-hidden">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <div className="relative h-48 md:h-64 w-full overflow-hidden bg-black flex items-center justify-center">
+                {/* Blurred Background */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                  <img
+                    src={displayImage}
+                    alt=""
+                    className="w-full h-full object-cover blur-xl opacity-40 scale-125"
+                  />
+                </div>
+                
+                {/* Dark overlay that fades on hover */}
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 z-10 pointer-events-none" />
+                
+                {/* Foreground uncropped image */}
                 <img
                   src={displayImage}
                   alt={service.title}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                  className="relative z-20 w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] p-2"
                 />
               </div>
               

@@ -6,8 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const materials = [
   { id: "mild-steel", name: "Mild Steel", color: "from-zinc-800 via-zinc-600 to-zinc-900", cursorColor: "rgba(82, 82, 91, 0.8)" },
   { id: "stainless-steel", name: "Stainless Steel", color: "from-slate-300 via-slate-100 to-slate-400", cursorColor: "rgba(203, 213, 225, 0.8)" },
-  { id: "aluminium", name: "Aluminium", color: "from-gray-400 via-gray-300 to-gray-500", cursorColor: "rgba(156, 163, 175, 0.8)" },
-  { id: "acp", name: "ACP Sheets", color: "from-blue-600 via-red-500 to-yellow-500", cursorColor: "rgba(59, 130, 246, 0.8)" },
+  { id: "gold-plated", name: "Gold Plated Metal", color: "from-yellow-500 via-yellow-200 to-yellow-600", cursorColor: "rgba(234, 179, 8, 0.8)" },
 ];
 
 export default function MaterialVisualizer() {
@@ -24,7 +23,7 @@ export default function MaterialVisualizer() {
           className="text-center mb-16"
         >
           <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-6">
-            MATERIAL <span className="text-primary">VISUALIZER</span>
+            MATERIAL J<span className="text-primary">K VISUALIZER</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base mb-8">
             Experience our precision patterns in different premium metals. Select a material below to see how it transforms the design.

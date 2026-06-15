@@ -18,34 +18,36 @@ export function getGalleryImages(): GalleryItem[] {
 
   // Map the 6 physical folders to properly cased category names for the UI
   const categoryMap: Record<string, string> = {
-    'gates': 'Gates',
-    'door': 'Door',
-    'ELEVATION DESIGN': 'Elevation Design',
-    'BUILDING ELEVATION DESIGn': 'Building Elevation Design',
-    'grill': 'Grill',
-    'wall art': 'Wall Art',
+    'gates': 'JK Gates',
+    'door': 'JK Door',
+    'ELEVATION DESIGN': 'JK Elevation Design',
+    'BUILDING ELEVATION DESIGn': 'JK Building Elevation Design',
+    'grill': 'JK Grill',
+    'wall art': 'JK Wall Art',
   };
 
   const prefixes: Record<string, string> = {
-    'Gates': 'G',
-    'Door': 'D',
-    'Elevation Design': 'E',
-    'Building Elevation Design': 'BE',
-    'Grill': 'R',
-    'Wall Art': 'W',
+    'JK Gates': 'G',
+    'JK Door': 'D',
+    'JK Elevation Design': 'E',
+    'JK Building Elevation Design': 'BE',
+    'JK Grill': 'R',
+    'JK Wall Art': 'W',
   };
 
   const counters: Record<string, number> = {
-    'Gates': 1,
-    'Door': 1,
-    'Elevation Design': 1,
-    'Building Elevation Design': 1,
-    'Grill': 1,
-    'Wall Art': 1,
+    'JK Gates': 1,
+    'JK Door': 1,
+    'JK Elevation Design': 1,
+    'JK Building Elevation Design': 1,
+    'JK Grill': 1,
+    'JK Wall Art': 1,
   };
 
   const folders = fs.readdirSync(imagesDir, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory());
+
+  const itemsByCategory: Record<string, GalleryItem[]> = {};
 
   for (const folder of folders) {
     const folderName = folder.name;
@@ -59,6 +61,8 @@ export function getGalleryImages(): GalleryItem[] {
       return ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.jfif'].includes(ext);
     });
 
+    const currentCategoryItems: GalleryItem[] = [];
+
     for (const file of files) {
       const prefix = prefixes[category];
       const count = counters[category]++;
@@ -68,15 +72,46 @@ export function getGalleryImages(): GalleryItem[] {
       // Use encodeURIComponent to handle spaces and special chars in filenames and folders
       const imagePath = `/images/services/${encodeURIComponent(folderName)}/${encodeURIComponent(file)}`;
 
-      items.push({
+      currentCategoryItems.push({
         id,
         category,
         designNumber,
         image: imagePath,
       });
     }
+
+    itemsByCategory[category] = currentCategoryItems;
   }
 
-  // Shuffle items or sort them if needed. We'll leave them sorted by folder/name by default.
+  const orderedCategories = [
+    'JK Building Elevation Design',
+    'JK Elevation Design',
+    'JK Door',
+    'JK Gates',
+    'JK Grill',
+    'JK Wall Art'
+  ];
+
+  const categoryArrays: GalleryItem[][] = [];
+  for (const cat of orderedCategories) {
+    if (itemsByCategory[cat]) {
+      categoryArrays.push(itemsByCategory[cat]);
+    }
+  }
+
+  // Interleave items: 1 from first category, 1 from second category, etc.
+  let hasMore = true;
+  let index = 0;
+  while (hasMore) {
+    hasMore = false;
+    for (const arr of categoryArrays) {
+      if (index < arr.length) {
+        items.push(arr[index]);
+        hasMore = true;
+      }
+    }
+    index++;
+  }
+
   return items;
 }

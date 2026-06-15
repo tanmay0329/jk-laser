@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { UploadCloud, PenLine } from "lucide-react";
+import { UploadCloud, PenLine, ChevronDown } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -16,8 +16,26 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    alert("Form submitted! We will get back to you soon.");
+    
+    // Construct WhatsApp message
+    const message = `*New Custom Design Request* 🛠️
+    
+*Name:* ${formData.name}
+*Phone:* ${formData.phone}
+
+*Requirements:*
+*Material:* ${formData.material}
+*Product Type:* ${formData.productType}
+*Dimensions:* ${formData.dimensions || 'Not specified'}
+
+*Message:*
+${formData.message}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/919022313957?text=${encodedMessage}`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, "_blank");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -66,7 +84,7 @@ export default function ContactForm() {
                       value={formData.name}
                       onChange={handleChange}
                       className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
-                      placeholder="John Doe"
+                      placeholder="Your Name"
                     />
                   </div>
                   <div className="space-y-2">
@@ -79,7 +97,7 @@ export default function ContactForm() {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
-                      placeholder="+91 98765 43210"
+                      placeholder="Your Number"
                     />
                   </div>
                 </div>
@@ -87,37 +105,42 @@ export default function ContactForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label htmlFor="material" className="text-[10px] md:text-xs uppercase tracking-wider text-white/70 font-semibold">Preferred Material</label>
-                    <select 
-                      id="material" 
-                      name="material"
-                      value={formData.material}
-                      onChange={handleChange}
-                      className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none"
-                    >
-                      <option value="Mild Steel">Mild Steel</option>
-                      <option value="Stainless Steel">Stainless Steel</option>
-                      <option value="Aluminum">Aluminum</option>
-                      <option value="Brass/Copper">Brass / Copper</option>
-                      <option value="Not Sure">Not Sure Yet</option>
-                    </select>
+                    <div className="relative">
+                      <select 
+                        id="material" 
+                        name="material"
+                        value={formData.material}
+                        onChange={handleChange}
+                        className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none"
+                      >
+                        <option value="Mild Steel">Mild Steel</option>
+                        <option value="Stainless Steel">Stainless Steel</option>
+                        <option value="Gold Plated Metal">Gold Plated Metal</option>
+                        <option value="Not Sure">Not Sure Yet</option>
+                      </select>
+                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50 pointer-events-none" />
+                    </div>
                   </div>
                   
                   <div className="space-y-2">
                     <label htmlFor="productType" className="text-[10px] md:text-xs uppercase tracking-wider text-white/70 font-semibold">Product Type <span className="text-primary">*</span></label>
-                    <select 
-                      id="productType" 
-                      name="productType"
-                      required
-                      value={formData.productType}
-                      onChange={handleChange}
-                      className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none"
-                    >
-                      <option value="Gates">Laser Gates</option>
-                      <option value="Railings">Railings</option>
-                      <option value="Panels">Decorative Panels</option>
-                      <option value="Name Plates">Name Plates</option>
-                      <option value="Custom">Custom Artwork</option>
-                    </select>
+                    <div className="relative">
+                      <select 
+                        id="productType" 
+                        name="productType"
+                        required
+                        value={formData.productType}
+                        onChange={handleChange}
+                        className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none"
+                      >
+                        <option value="Gates">Laser Gates</option>
+                        <option value="Railings">Railings</option>
+                        <option value="Panels">Decorative Panels</option>
+                        <option value="Name Plates">Name Plates</option>
+                        <option value="Custom">Custom Artwork</option>
+                      </select>
+                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50 pointer-events-none" />
+                    </div>
                   </div>
                 </div>
 
@@ -149,12 +172,11 @@ export default function ContactForm() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] md:text-xs uppercase tracking-wider text-white/70 font-semibold">Upload Reference Image</label>
-                  <div className="w-full border-2 border-dashed border-white/20 rounded-sm p-4 md:p-6 flex flex-col items-center justify-center text-center hover:border-primary/50 transition-colors cursor-pointer group">
-                    <UploadCloud className="w-8 h-8 text-white/40 mb-2 group-hover:text-primary transition-colors" />
-                    <p className="text-xs md:text-sm text-white/60 mb-1">Click to upload or drag and drop</p>
-                    <p className="text-[10px] md:text-xs text-white/40">SVG, PNG, JPG or PDF (max. 5MB)</p>
-                    <input type="file" className="hidden" />
+                  <label className="text-[10px] md:text-xs uppercase tracking-wider text-white/70 font-semibold">Reference Images</label>
+                  <div className="w-full border border-primary/20 bg-primary/5 rounded-sm p-4 md:p-6 flex flex-col items-center justify-center text-center">
+                    <UploadCloud className="w-8 h-8 text-primary mb-2" />
+                    <p className="text-xs md:text-sm text-white/80 font-medium mb-1">Have reference images or drawings?</p>
+                    <p className="text-[10px] md:text-xs text-white/50">You can easily attach them directly in the WhatsApp chat after clicking submit!</p>
                   </div>
                 </div>
 
