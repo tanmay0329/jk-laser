@@ -57,19 +57,25 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <h3 className="font-heading font-semibold text-lg text-white uppercase tracking-wider">Contact Us</h3>
             <ul className="flex flex-col gap-4">
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-muted-foreground">+91 90223 13957</span>
+              <li>
+                <a href="tel:+919022313957" className="flex items-start gap-3 group">
+                  <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <span className="text-sm text-muted-foreground group-hover:text-white transition-colors">+91 90223 13957</span>
+                </a>
               </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-muted-foreground">info@jklaserbeed.com</span>
+              <li>
+                <a href="mailto:info@jklaserbeed.com" className="flex items-start gap-3 group">
+                  <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <span className="text-sm text-muted-foreground group-hover:text-white transition-colors">info@jklaserbeed.com</span>
+                </a>
               </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-muted-foreground leading-relaxed">
-                  Jijamata Chowk, Beed, Maharashtra - 431122
-                </span>
+              <li>
+                <a href="https://maps.app.goo.gl/oh3QKbmURBPMjjmB7" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group">
+                  <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <span className="text-sm text-muted-foreground leading-relaxed group-hover:text-white transition-colors">
+                    JK Laser, Jija Mata Chowk, Beed
+                  </span>
+                </a>
               </li>
             </ul>
             <a href="https://wa.me/919022313957" className="inline-flex items-center gap-2 border border-primary text-primary px-4 py-2 rounded-sm text-sm font-medium hover:bg-primary hover:text-black transition-colors self-start mt-2">
@@ -81,7 +87,7 @@ export default function Footer() {
           {/* Design of the Month */}
           <div className="flex flex-col gap-6">
             <h3 className="font-heading font-semibold text-lg text-white uppercase tracking-wider">Design of the Month</h3>
-            <div className="group relative overflow-hidden rounded-sm border border-white/10">
+            <Link href="/gallery" className="group relative overflow-hidden rounded-sm border border-white/10 block">
               <div className="aspect-[4/3] bg-[#121212] flex items-center justify-center p-4">
                 <div className="w-full h-full border border-primary/30 flex items-center justify-center bg-black/50">
                   <span className="text-primary/50 font-heading text-sm text-center px-2">Premium Wall Panel<br/>P-125</span>
@@ -90,7 +96,7 @@ export default function Footer() {
               <div className="absolute inset-x-0 bottom-0 bg-primary py-2 px-3 translate-y-full group-hover:translate-y-0 transition-transform">
                 <p className="text-black text-xs font-bold text-center uppercase">View Details</p>
               </div>
-            </div>
+            </Link>
             <p className="text-center text-primary text-xs font-bold uppercase tracking-widest mt-2">
               "Precision Cut. Perfect Finish."
             </p>
