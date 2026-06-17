@@ -29,8 +29,53 @@ const ITEMS_PER_PAGE = 20;
 export default function DesignGallery({ initialItems = [] }: DesignGalleryProps) {
   const [filter, setFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [lightboxImage, setLightboxImage] = useState<{url: string, number: string} | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<{url: string, number: string, ratio?: string} | null>(null);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [imageRatios, setImageRatios] = useState<Record<string, string>>({});
+
+  const handleImageLoad = (id: string, e: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth, naturalHeight } = e.currentTarget;
+    if (!naturalWidth || !naturalHeight) return;
+    
+    const ratio = naturalWidth / naturalHeight;
+    const commonRatios = [
+      { name: "1:1", value: 1 / 1 },
+      { name: "4:3", value: 4 / 3 },
+      { name: "3:4", value: 3 / 4 },
+      { name: "16:9", value: 16 / 9 },
+      { name: "9:16", value: 9 / 16 },
+      { name: "3:2", value: 3 / 2 },
+      { name: "2:3", value: 2 / 3 },
+      { name: "4:5", value: 4 / 5 },
+      { name: "5:4", value: 5 / 4 },
+    ];
+    
+    let closest = commonRatios[0];
+    let minDiff = Math.abs(ratio - closest.value);
+    
+    for (const cr of commonRatios) {
+      const diff = Math.abs(ratio - cr.value);
+      if (diff < minDiff) {
+        closest = cr;
+        minDiff = diff;
+      }
+    }
+    
+    let displayRatio = "";
+    if (minDiff < 0.1) {
+      displayRatio = closest.name;
+    } else {
+      const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b));
+      const d = Math.round(gcd(naturalWidth, naturalHeight));
+      if (d > 0 && naturalWidth/d < 100 && naturalHeight/d < 100) {
+        displayRatio = `${Math.round(naturalWidth/d)}:${Math.round(naturalHeight/d)}`;
+      } else {
+        displayRatio = `${naturalWidth}x${naturalHeight}`;
+      }
+    }
+    
+    setImageRatios(prev => ({ ...prev, [id]: displayRatio }));
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -75,6 +120,27 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
   const handleLoadMore = () => {
     setVisibleCount(prev => prev + ITEMS_PER_PAGE);
   };
+
+  const [cols, setCols] = useState(4);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const updateCols = () => {
+      if (window.innerWidth < 768) setCols(2);
+      else if (window.innerWidth < 1024) setCols(3);
+      else setCols(4);
+    };
+    updateCols();
+    window.addEventListener('resize', updateCols);
+    return () => window.removeEventListener('resize', updateCols);
+  }, []);
+
+  // Split visible items into columns
+  const columnItems = Array.from({ length: cols }, () => [] as typeof visibleItems);
+  visibleItems.forEach((item, i) => {
+    columnItems[i % cols].push(item);
+  });
 
   return (
     <section ref={containerRef} id="gallery" className="py-24 bg-black relative overflow-hidden">
@@ -133,62 +199,70 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
             </div>
           </div>
 
-        {/* Gallery Grid - Horizontal loading using CSS Grid */}
-        <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
-          <AnimatePresence>
-            {visibleItems.map((item, index) => {
-              const initialX = index % 2 === 0 ? -50 : 50;
-              return (
-              <motion.div
-                layout
-                initial={{ opacity: 0, x: initialX, scale: 0.9 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ 
-                  duration: 0.5, 
-                  type: "spring",
-                  stiffness: 120,
-                  damping: 20
-                }}
-                key={item.id}
-                className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] aspect-[4/5] will-change-transform transform-gpu cursor-pointer flex items-center justify-center"
-                onClick={() => setLightboxImage({ url: item.image, number: item.designNumber })}
-              >
-                <img
-                  src={item.image}
-                  alt={`Design ${item.designNumber}`}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 select-none"
-                  loading="lazy"
-                  onContextMenu={(e) => e.preventDefault()}
-                  onDragStart={(e) => e.preventDefault()}
-                />
-                
-                {/* Image Watermark */}
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10">
-                  <span className="text-white/30 font-heading font-black text-4xl sm:text-5xl lg:text-3xl transform -rotate-[30deg] tracking-widest whitespace-nowrap select-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                    JK LASER
-                  </span>
-                </div>
-                
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4">
-                  <button 
-                    onClick={() => setLightboxImage({ url: item.image, number: item.designNumber })}
-                    className="w-12 h-12 rounded-full bg-primary/20 text-primary border border-primary/50 flex items-center justify-center hover:bg-primary hover:text-black transition-colors"
-                  >
-                    <ZoomIn size={20} />
-                  </button>
-                  <div className="text-center">
-                    <p className="text-xs text-primary font-bold uppercase tracking-wider mb-1">{item.category}</p>
-                    <p className="text-xl text-white font-heading font-bold">{item.designNumber}</p>
-                  </div>
-                </div>
-              </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+        {/* Gallery Grid - JS Masonry using Flex Columns */}
+        <div className={`flex gap-3 md:gap-6 ${mounted ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
+          {columnItems.map((column, colIndex) => (
+            <div key={colIndex} className="flex-1 flex flex-col gap-3 md:gap-6">
+              <AnimatePresence>
+                {column.map((item, itemIndex) => {
+                  const initialX = colIndex % 2 === 0 ? -50 : 50;
+                  return (
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, x: initialX, scale: 0.9 }}
+                      whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                      viewport={{ once: true, amount: 0.1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ 
+                        duration: 0.5, 
+                        type: "spring",
+                        stiffness: 120,
+                        damping: 20
+                      }}
+                      key={item.id}
+                      className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] will-change-transform transform-gpu cursor-pointer block"
+                      onClick={() => setLightboxImage({ url: item.image, number: item.designNumber })}
+                    >
+                      <img
+                        src={item.image}
+                        alt={`Design ${item.designNumber}`}
+                        className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110 select-none block"
+                        loading="lazy"
+                        onContextMenu={(e) => e.preventDefault()}
+                        onDragStart={(e) => e.preventDefault()}
+                        onLoad={(e) => handleImageLoad(item.id, e)}
+                      />
+                      
+                      {/* Image Watermark */}
+                      <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10">
+                        <span className="text-white/30 font-heading font-black text-4xl sm:text-5xl lg:text-3xl transform -rotate-[30deg] tracking-widest whitespace-nowrap select-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                          JK LASER
+                        </span>
+                      </div>
+                      
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4">
+                        <button 
+                          onClick={(e) => { e.stopPropagation(); setLightboxImage({ url: item.image, number: item.designNumber, ratio: imageRatios[item.id] }) }}
+                          className="w-12 h-12 rounded-full bg-primary/20 text-primary border border-primary/50 flex items-center justify-center hover:bg-primary hover:text-black transition-colors"
+                        >
+                          <ZoomIn size={20} />
+                        </button>
+                        <div className="text-center">
+                          <p className="text-xs text-primary font-bold uppercase tracking-wider mb-1">{item.category}</p>
+                          <p className="text-xl text-white font-heading font-bold">{item.designNumber}</p>
+                          {imageRatios[item.id] && (
+                            <p className="text-xs text-white/70 mt-1 uppercase tracking-wider">Frame Size: {imageRatios[item.id]}</p>
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
 
         {filteredItems.length === 0 && (
           <div className="text-center py-20 text-muted-foreground">
@@ -243,8 +317,14 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                   </span>
                 </div>
               </div>
-              <div className="bg-black/80 px-6 py-2 rounded-full border border-primary/30">
+              <div className="bg-black/80 px-8 py-3 rounded-full border border-primary/30 flex items-center gap-4">
                 <p className="text-primary font-heading font-bold text-lg">Design: {lightboxImage.number}</p>
+                {lightboxImage.ratio && (
+                  <>
+                    <div className="w-px h-4 bg-white/20"></div>
+                    <p className="text-white/70 text-sm font-medium uppercase tracking-wider">Frame Size: {lightboxImage.ratio}</p>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
