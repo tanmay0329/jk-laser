@@ -1,4 +1,5 @@
 import { login } from './actions'
+import { SubmitButton } from './SubmitButton'
 
 export default async function LoginPage({
   searchParams,
@@ -51,12 +52,7 @@ export default async function LoginPage({
             </div>
           )}
 
-          <button
-            formAction={login}
-            className="w-full bg-primary text-black font-bold py-3.5 px-4 rounded-md mt-4 hover:bg-white transition-colors tracking-widest uppercase text-sm"
-          >
-            Sign In to Dashboard
-          </button>
+          <SubmitButton loginAction={login} />
         </form>
       </div>
     </div>

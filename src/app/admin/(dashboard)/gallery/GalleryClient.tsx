@@ -14,6 +14,7 @@ export interface GalleryDesign {
 export default function GalleryClient({ initialDesigns }: { initialDesigns: GalleryDesign[] }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [preview, setPreview] = useState<string | null>(null)
 
@@ -41,7 +42,9 @@ export default function GalleryClient({ initialDesigns }: { initialDesigns: Gall
 
   async function handleDelete(id: string) {
     if (confirm('Are you sure you want to delete this design?')) {
+      setDeletingId(id)
       await deleteGalleryDesign(id)
+      setDeletingId(null)
     }
   }
 
@@ -101,12 +104,17 @@ export default function GalleryClient({ initialDesigns }: { initialDesigns: Gall
                 <p className="text-white font-medium">{design.design_number}</p>
               </div>
               {/* Hover Actions */}
-              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className={`absolute top-2 right-2 transition-opacity ${deletingId === design.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                 <button 
                   onClick={() => handleDelete(design.id)}
-                  className="bg-black/80 hover:bg-red-500 text-white p-2 rounded-md transition-colors border border-white/10"
+                  disabled={deletingId === design.id}
+                  className="bg-black/80 hover:bg-red-500 text-white p-2 rounded-md transition-colors border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Trash size={14} />
+                  {deletingId === design.id ? (
+                    <span className="text-xs uppercase tracking-wider font-bold px-1">Deleting...</span>
+                  ) : (
+                    <Trash size={14} />
+                  )}
                 </button>
               </div>
             </div>

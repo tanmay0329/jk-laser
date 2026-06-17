@@ -15,6 +15,7 @@ export interface Review {
 export default function ReviewsClient({ initialReviews }: { initialReviews: Review[] }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
   const [error, setError] = useState('')
 
   async function handleAdd(formData: FormData) {
@@ -31,7 +32,9 @@ export default function ReviewsClient({ initialReviews }: { initialReviews: Revi
 
   async function handleDelete(id: string) {
     if (confirm('Are you sure you want to delete this review?')) {
+      setDeletingId(id)
       await deleteReview(id)
+      setDeletingId(null)
     }
   }
 
@@ -77,8 +80,16 @@ export default function ReviewsClient({ initialReviews }: { initialReviews: Revi
                 <p className="text-primary text-xs uppercase tracking-wide">{review.company}</p>
               </div>
               <div className="flex justify-end gap-3 mt-4 border-t border-white/5 pt-4">
-                <button onClick={() => handleDelete(review.id)} className="text-red-500/50 hover:text-red-500 transition-colors">
-                  <Trash size={16} />
+                <button 
+                  onClick={() => handleDelete(review.id)} 
+                  disabled={deletingId === review.id}
+                  className="text-red-500/50 hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  {deletingId === review.id ? (
+                    <span className="text-xs uppercase tracking-wider font-bold">Deleting...</span>
+                  ) : (
+                    <Trash size={16} />
+                  )}
                 </button>
               </div>
             </div>

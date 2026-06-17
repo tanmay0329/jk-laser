@@ -1,7 +1,8 @@
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import { logout } from '../login/actions'
-import { LayoutDashboard, Image as ImageIcon, LayoutTemplate, LogOut, Star } from 'lucide-react'
+import { LayoutDashboard, Image as ImageIcon, LayoutTemplate, Star } from 'lucide-react'
+import { LogoutButton } from './LogoutButton'
 
 export default async function DashboardLayout({
   children,
@@ -48,10 +49,7 @@ export default async function DashboardLayout({
             </div>
           )}
           <form action={logout}>
-            <button className="flex w-full items-center justify-center gap-2 px-4 py-3 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-md transition-colors">
-              <LogOut size={16} />
-              <span className="font-bold text-sm uppercase tracking-wider">Sign Out</span>
-            </button>
+            <LogoutButton />
           </form>
         </div>
       </aside>
