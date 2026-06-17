@@ -3,15 +3,19 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
-const testimonials = [
-  { id: 1, name: "Rajesh Kumar", company: "R.K. Architects", text: "The precision of their laser cutting is unmatched. The custom gate they designed for our luxury villa project became the centerpiece of the entire property." },
-  { id: 2, name: "Sneha Patil", company: "Interior Designer", text: "I've worked with many fabricators, but JK Laser Beed delivers flawless decorative panels every time. Their finish is absolutely premium." },
-  { id: 3, name: "Amit Sharma", company: "Sharma Estates", text: "Outstanding quality and timely delivery. The metallic gradients and intricate patterns they incorporated in our office signage are stunning." },
-  { id: 4, name: "Priya Desai", company: "Desai Builders", text: "From CAD drawing to final installation, their process is seamless. Highly recommend for any custom metalwork needs." },
-  { id: 5, name: "Vikram Singh", company: "Singh Constructions", text: "Their state-of-the-art CNC machines create edges so smooth, no extra polishing was needed. Truly the best in Maharashtra." }
-];
+export interface Testimonial {
+  id: string;
+  name: string;
+  company: string;
+  text: string;
+  rating: number;
+}
 
-export default function Testimonials() {
+interface TestimonialsProps {
+  testimonials?: Testimonial[];
+}
+
+export default function Testimonials({ testimonials = [] }: TestimonialsProps) {
   return (
     <section className="py-24 bg-black relative overflow-hidden border-t border-white/5">
       {/* Background glow */}

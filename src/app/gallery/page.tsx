@@ -1,14 +1,29 @@
-import { getGalleryImages } from "@/lib/gallery";
 import DesignGallery from "@/components/sections/DesignGallery";
+import { createClient } from "@/utils/supabase/server";
 
 export const metadata = {
   title: "Design Gallery | JK Laser",
   description: "Browse our premium laser cut designs.",
 };
 
-export default function GalleryPage() {
-  const galleryImages = getGalleryImages();
-  
+// Revalidate this page every hour (3600 seconds) or when data changes
+export const revalidate = 3600;
+
+export default async function GalleryPage() {
+  const supabase = await createClient();
+  const { data: galleryImages } = await supabase
+    .from('gallery_designs')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  // Map to the format DesignGallery expects
+  const formattedImages = (galleryImages || []).map(img => ({
+    id: img.id,
+    category: img.category,
+    designNumber: img.design_number,
+    image: img.image_url
+  }));
+
   return (
     <div className="bg-black min-h-screen relative">
       <div className="absolute top-4 left-4 z-50">
@@ -22,7 +37,7 @@ export default function GalleryPage() {
       </div>
       {/* Spacer for navbar */}
       <div className="h-10"></div>
-      <DesignGallery initialItems={galleryImages} />
+      <DesignGallery initialItems={formattedImages} />
     </div>
   );
 }

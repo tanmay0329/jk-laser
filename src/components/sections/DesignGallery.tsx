@@ -133,8 +133,8 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
             </div>
           </div>
 
-        {/* Gallery Grid - Pinterest Masonry style using CSS columns */}
-        <motion.div layout className="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-6">
+        {/* Gallery Grid - Horizontal loading using CSS Grid */}
+        <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
           <AnimatePresence>
             {visibleItems.map((item, index) => {
               const initialX = index % 2 === 0 ? -50 : 50;
@@ -152,13 +152,13 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                   damping: 20
                 }}
                 key={item.id}
-                className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] mb-3 md:mb-6 break-inside-avoid will-change-transform transform-gpu block cursor-pointer"
+                className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] aspect-[4/5] will-change-transform transform-gpu cursor-pointer flex items-center justify-center"
                 onClick={() => setLightboxImage({ url: item.image, number: item.designNumber })}
               >
                 <img
                   src={item.image}
                   alt={`Design ${item.designNumber}`}
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110 select-none"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 select-none"
                   loading="lazy"
                   onContextMenu={(e) => e.preventDefault()}
                   onDragStart={(e) => e.preventDefault()}
