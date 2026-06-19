@@ -44,9 +44,7 @@ ${formData.message}`;
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#050505] relative overflow-hidden">
-      {/* Decorative background */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1535813547-99c456a41d4a?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-5 mix-blend-screen pointer-events-none" />
+    <section id="contact" className="py-24 bg-transparent relative border-t border-white/5 overflow-hidden">
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8">
@@ -63,7 +61,7 @@ ${formData.message}`;
                 stiffness: 80,
                 damping: 20
               }}
-              className="bg-[#121212] border border-white/10 rounded-sm p-5 md:p-10 relative overflow-hidden"
+              className="bg-[#1A1500]/60 backdrop-blur-xl border border-white/5 rounded-2xl p-5 md:p-10 relative overflow-hidden shadow-2xl"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[60px] rounded-full pointer-events-none" />
               
@@ -83,7 +81,7 @@ ${formData.message}`;
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-[#120F00]/60 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                       placeholder="Your Name"
                     />
                   </div>
@@ -96,7 +94,7 @@ ${formData.message}`;
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-[#120F00]/60 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                       placeholder="Your Number"
                     />
                   </div>
@@ -111,7 +109,7 @@ ${formData.message}`;
                         name="material"
                         value={formData.material}
                         onChange={handleChange}
-                        className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none"
+                        className="w-full bg-[#120F00]/60 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none"
                       >
                         <option value="Mild Steel">Mild Steel</option>
                         <option value="Stainless Steel">Stainless Steel</option>
@@ -131,7 +129,7 @@ ${formData.message}`;
                         required
                         value={formData.productType}
                         onChange={handleChange}
-                        className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none"
+                        className="w-full bg-[#120F00]/60 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none"
                       >
                         <option value="Gates">Laser Gates</option>
                         <option value="Railings">Railings</option>
@@ -152,7 +150,7 @@ ${formData.message}`;
                     name="dimensions" 
                     value={formData.dimensions}
                     onChange={handleChange}
-                    className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                    className="w-full bg-[#120F00]/60 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                     placeholder="e.g. 10ft x 6ft"
                   />
                 </div>
@@ -166,7 +164,7 @@ ${formData.message}`;
                     rows={4}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full bg-black border border-white/10 rounded-sm px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors resize-none"
+                    className="w-full bg-[#120F00]/60 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors resize-none"
                     placeholder="Tell us about your requirements..."
                   ></textarea>
                 </div>
@@ -220,7 +218,7 @@ ${formData.message}`;
                 href="https://maps.app.goo.gl/oh3QKbmURBPMjjmB7" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block w-full h-48 bg-[#121212] border border-white/10 rounded-sm relative overflow-hidden group cursor-none md:cursor-none"
+                className="block w-full h-48 bg-[#1A1500]/60 backdrop-blur-xl border border-white/5 rounded-2xl relative overflow-hidden group cursor-none md:cursor-none"
               >
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-luminosity group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-500" />

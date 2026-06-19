@@ -43,7 +43,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="bg-black">
+    <div className="bg-transparent">
       <Hero />
       <GlowingDivider />
       <FeaturedProjects projects={featuredProjects || []} />

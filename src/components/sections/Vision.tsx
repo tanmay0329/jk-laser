@@ -5,7 +5,7 @@ import { TrendingUp, Cpu } from "lucide-react";
 
 export default function Vision() {
   return (
-    <section id="vision" className="py-24 bg-[#050505] relative border-b border-white/5 overflow-hidden">
+    <section id="vision" className="py-24 bg-transparent relative border-b border-white/5 overflow-hidden">
       {/* Background glowing gradients */}
       <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[10%] right-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[150px]" />
@@ -19,7 +19,7 @@ export default function Vision() {
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col gap-6"
           >
@@ -61,7 +61,7 @@ export default function Vision() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 1, delay: 0.2 }}
             className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square flex items-center justify-center perspective-[1200px]"
           >
@@ -78,8 +78,8 @@ export default function Vision() {
               }}
               className="relative w-full h-full max-w-[450px] max-h-[450px]"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-sm border border-primary/30 transform rotate-6 scale-95 opacity-50 blur-sm" />
-              <div className="absolute inset-0 bg-[#0A0A0A] rounded-sm border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.15)] flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-sm border border-primary/30 transform rotate-6 scale-95 opacity-50" />
+              <div className="absolute inset-0 bg-[#1A1500]/60 backdrop-blur-xl rounded-sm border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.15)] flex items-center justify-center">
                 
                 <img 
                   src="/images/vision_building.png" 

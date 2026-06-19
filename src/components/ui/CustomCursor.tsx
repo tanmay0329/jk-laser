@@ -17,12 +17,19 @@ export default function CustomCursor() {
 
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     // Only initialize custom cursor on desktop to avoid issues on touch devices
     if (window.matchMedia("(max-width: 768px)").matches) return;
     
     setIsVisible(true);
+
+    const handleActivate = () => {
+      setIsActive(true);
+    };
+    
+    window.addEventListener("activate-custom-cursor", handleActivate);
 
     const moveCursor = (e: MouseEvent) => {
       // Update exact dot (centered, 6px width -> subtract 3)
@@ -55,6 +62,7 @@ export default function CustomCursor() {
     return () => {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener("activate-custom-cursor", handleActivate);
     };
   }, [cursorX, cursorY, exactX, exactY]);
 
@@ -62,6 +70,8 @@ export default function CustomCursor() {
 
   return (
     <>
+      {isActive && <style>{`* { cursor: none !important; }`}</style>}
+      
       {/* Trailing Glow */}
       <motion.div
         className="fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[9998] mix-blend-screen"
@@ -73,7 +83,7 @@ export default function CustomCursor() {
         }}
         animate={{
           scale: isHovering ? 2.5 : 1,
-          opacity: isHovering ? 0.3 : 0.8,
+          opacity: isActive ? (isHovering ? 0.3 : 0.8) : 0,
         }}
         transition={{ duration: 0.2 }}
       />
@@ -86,7 +96,8 @@ export default function CustomCursor() {
           y: exactY,
         }}
         animate={{
-          scale: isHovering ? 0 : 1,
+          scale: isActive && !isHovering ? 1 : 0,
+          opacity: isActive ? 1 : 0,
         }}
         transition={{ duration: 0.2 }}
       />

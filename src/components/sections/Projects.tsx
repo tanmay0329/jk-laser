@@ -50,7 +50,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
       onClick={() => setShowAfter(!showAfter)}
       onMouseEnter={() => setShowAfter(true)}
       onMouseLeave={() => setShowAfter(false)}
-      className="relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] will-change-transform transform-gpu cursor-pointer"
+      className="relative rounded-2xl overflow-hidden border border-white/5 bg-[#1A1500]/60 backdrop-blur-xl will-change-transform transform-gpu cursor-pointer shadow-lg"
     >
       <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
         {/* Before Image */}
@@ -111,13 +111,13 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 bg-[#050505] relative overflow-hidden">
+    <section id="projects" className="py-24 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.6 }}
             className="max-w-2xl text-center md:text-left"
           >

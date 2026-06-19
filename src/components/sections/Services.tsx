@@ -64,7 +64,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
   const router = useRouter();
 
   return (
-    <section id="services" className="py-24 bg-[#0A0A0A] relative border-b border-white/5 overflow-hidden">
+    <section id="services" className="py-24 bg-transparent relative border-b border-white/5 overflow-hidden">
       {/* Decorative background element */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[20%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[100px]" />
@@ -75,7 +75,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -110,9 +110,9 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
                 stiffness: 120,
                 damping: 20
               }}
-              className="group relative flex flex-col bg-[#121212] border border-white/10 rounded-sm overflow-hidden hover:border-primary/50 transition-colors duration-500 will-change-transform transform-gpu cursor-pointer"
+              className="group relative flex flex-col bg-[#1A1500]/60 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-colors duration-500 will-change-transform transform-gpu cursor-pointer shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             >
-              <div className="relative h-48 md:h-64 w-full overflow-hidden bg-black flex items-center justify-center">
+              <div className="relative h-48 md:h-64 w-full overflow-hidden flex items-center justify-center">
                 {/* Blurred Background */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
                   <img

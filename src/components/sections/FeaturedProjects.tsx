@@ -53,12 +53,12 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
   const displayProjects = projects && projects.length > 0 ? projects : fallbackProjects;
 
   return (
-    <section id="featured-projects" className="py-24 bg-black relative overflow-hidden">
+    <section id="featured-projects" className="py-24 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -91,9 +91,9 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
             return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ 
                   duration: 0.6, 
                   delay: index * 0.15,
@@ -102,19 +102,25 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
                   damping: 20
                 }}
                 onClick={() => setSelectedProject(item)}
-                className={`group relative overflow-hidden border border-white/10 bg-[#121212] h-[250px] sm:h-[400px] md:h-[500px] cursor-pointer ${shapeClass}`}
+                className={`group relative overflow-hidden border border-white/5 bg-[#1A1500]/60 backdrop-blur-xl hover:border-primary/30 h-[250px] sm:h-[400px] md:h-[500px] cursor-pointer shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-colors duration-500 ${shapeClass}`}
               >
-                <img
-                  src={item.image_url}
-                  alt={item.title}
-                  className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center">
-                  <h3 className="text-sm sm:text-xl font-heading font-bold text-white mb-2 leading-tight">{item.title}</h3>
-                  <div className="w-8 sm:w-12 h-[2px] sm:h-1 bg-primary rounded-full transform origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100 mx-auto"></div>
-                </div>
+                <motion.div 
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 }}
+                  className="w-full h-full relative"
+                >
+                  <img
+                    src={item.image_url}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center">
+                    <h3 className="text-sm sm:text-xl font-heading font-bold text-white mb-2 leading-tight">{item.title}</h3>
+                    <div className="w-8 sm:w-12 h-[2px] sm:h-1 bg-primary rounded-full transform origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100 mx-auto"></div>
+                  </div>
+                </motion.div>
               </motion.div>
             );
           })}
@@ -128,7 +134,7 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-10"
+            className="fixed inset-0 z-[100] bg-[#1A1500]/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
             onClick={() => setSelectedProject(null)}
           >
             <button 
@@ -143,7 +149,7 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="relative max-w-5xl w-full max-h-full flex flex-col md:flex-row items-center bg-[#121212] border border-white/10 rounded-xl overflow-hidden shadow-2xl"
+              className="relative max-w-5xl w-full max-h-full flex flex-col md:flex-row items-center bg-[#1A1500]/60 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Image side */}

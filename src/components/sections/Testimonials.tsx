@@ -17,7 +17,7 @@ interface TestimonialsProps {
 
 export default function Testimonials({ testimonials = [] }: TestimonialsProps) {
   return (
-    <section className="py-24 bg-black relative overflow-hidden border-t border-white/5">
+    <section id="reviews" className="py-24 bg-transparent relative overflow-hidden border-b border-white/5">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
 

@@ -143,7 +143,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
   });
 
   return (
-    <section ref={containerRef} id="gallery" className="py-24 bg-black relative overflow-hidden">
+    <section ref={containerRef} id="gallery" className="py-24 bg-transparent relative overflow-hidden">
       {/* Parallax Background */}
       <motion.div 
         className="absolute inset-0 z-0 opacity-10 pointer-events-none"
@@ -156,7 +156,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -193,7 +193,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                 placeholder="Search design (e.g. G001)"
                 value={searchQuery}
                 onChange={handleSearchChange}
-                className="w-full bg-[#121212] border border-white/20 rounded-full px-5 py-2.5 text-sm text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all pr-10"
+                className="w-full bg-[#1A1500]/60 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2.5 text-sm text-white focus:outline-none focus:border-primary transition-all pr-10"
               />
               <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40" size={16} />
             </div>
@@ -211,7 +211,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                       layout
                       initial={{ opacity: 0, x: initialX, scale: 0.9 }}
                       whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                      viewport={{ once: true, amount: 0.1 }}
+                      viewport={{ once: false, amount: 0.1 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ 
                         duration: 0.5, 
@@ -220,7 +220,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                         damping: 20
                       }}
                       key={item.id}
-                      className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] will-change-transform transform-gpu cursor-pointer block"
+                      className="group relative rounded-2xl overflow-hidden border border-white/5 bg-[#1A1500]/60 backdrop-blur-xl will-change-transform transform-gpu cursor-pointer block shadow-lg hover:border-primary/30 transition-colors duration-500"
                       onClick={() => setLightboxImage({ url: item.image, number: item.designNumber })}
                     >
                       <img
@@ -291,7 +291,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-10"
+            className="fixed inset-0 z-[100] bg-[#1A1500]/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
             onClick={() => setLightboxImage(null)}
           >
             <button 
@@ -321,7 +321,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                   />
                 </div>
               </div>
-              <div className="bg-black/80 px-8 py-3 rounded-full border border-primary/30 flex items-center gap-4">
+              <div className="bg-[#1A1500]/80 backdrop-blur-xl px-8 py-3 rounded-full border border-primary/30 flex items-center gap-4 shadow-2xl">
                 <p className="text-primary font-heading font-bold text-lg">Design: {lightboxImage.number}</p>
                 {lightboxImage.ratio && (
                   <>

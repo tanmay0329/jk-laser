@@ -53,10 +53,10 @@ export default function Hero() {
   const backgroundY = useTransform(scrollY, [0, 1000], ["0%", "50%"]);
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-16 lg:pt-28 lg:pb-20">
+    <section id="hero" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-transparent pt-20 pb-20">
       {/* Background Video with Overlay */}
       <motion.div 
-        className="absolute inset-0 z-0 bg-[#0A0A0A]"
+        className="absolute inset-0 z-0 bg-transparent"
         style={{ y: backgroundY }}
       >
         <video
@@ -68,8 +68,8 @@ export default function Hero() {
         >
           <source src="https://assets.mixkit.co/videos/preview/mixkit-welder-working-with-sparks-flying-around-34463-large.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
       </motion.div>
 
       {/* Gold glowing accent */}
@@ -106,8 +106,8 @@ export default function Hero() {
       <div className="container relative z-20 mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1, ease: "easeOut" }}
             className="flex flex-col gap-6 text-center md:text-left items-center md:items-start"
           >
@@ -116,7 +116,7 @@ export default function Hero() {
               <span className="text-xs font-semibold tracking-widest text-primary uppercase">Premium Metal Fabrication</span>
             </div>
             
-            <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
+            <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.1] text-white">
               PRECISION <br />
               <span className="text-gradient-gold">JK LASER CUTTING</span> <br />
               & CUSTOM DESIGN
@@ -130,14 +130,14 @@ export default function Hero() {
             </p>
             
             <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 mt-4 w-full md:w-auto">
-              <Link href="/gallery" className="group relative inline-flex items-center justify-center gap-2 bg-gradient-gold text-black px-8 py-4 rounded-sm font-bold text-sm tracking-wide overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:scale-105">
+              <Link href="/gallery" className="group relative inline-flex items-center justify-center gap-2 bg-gradient-gold text-black px-8 py-4 rounded-full font-bold text-sm tracking-wide overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.6)] hover:scale-105">
                 <span className="relative z-10 flex items-center gap-2">
                   VIEW DESIGNS <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </Link>
               
-              <Link href="#contact" className="group inline-flex items-center justify-center gap-2 bg-transparent border border-white text-white px-8 py-4 rounded-sm font-bold text-sm tracking-wide hover:bg-white hover:text-black transition-all hover:scale-105">
+              <Link href="#contact" className="group inline-flex items-center justify-center gap-2 bg-[#1A1500]/60 backdrop-blur-md border border-white/10 text-white px-8 py-4 rounded-full font-bold text-sm tracking-wide hover:bg-white hover:text-black transition-all duration-300 hover:scale-105 shadow-lg">
                 <FileText size={18} /> REQUEST QUOTE
               </Link>
             </div>

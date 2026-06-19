@@ -12,12 +12,12 @@ const iconMap: Record<string, any> = {
 
 export default function Process() {
   return (
-    <section id="process" className="py-24 bg-[#0A0A0A] relative overflow-hidden">
+    <section id="process" className="py-24 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -36,7 +36,7 @@ export default function Process() {
           <motion.div 
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-primary via-[#F3E5AB] to-primary origin-left"
           />
@@ -52,7 +52,7 @@ export default function Process() {
                   key={process.id}
                   initial={{ opacity: 0, x: initialX, y: 20 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{ 
                     duration: 0.7, 
                     delay: index * 0.15,
@@ -69,7 +69,7 @@ export default function Process() {
                   
                   <Link href={`/process/${process.slug}`} className="flex flex-col items-center w-full h-full relative z-20 outline-none">
                     {/* Icon Circle */}
-                    <div className="relative w-24 h-24 rounded-full border-2 border-white/20 bg-[#121212] flex items-center justify-center mb-6 z-10 group-hover:border-primary transition-colors duration-300">
+                    <div className="relative w-24 h-24 rounded-full border-2 border-white/20 bg-[#1A1500]/60 backdrop-blur-xl flex items-center justify-center mb-6 z-10 group-hover:border-primary transition-colors duration-300">
                       <div className="absolute inset-0 rounded-full border-2 border-primary scale-0 group-hover:scale-100 transition-transform duration-500 ease-out opacity-50" />
                       <Icon className="w-8 h-8 text-white/50 group-hover:text-primary transition-colors duration-300 relative z-10" />
                       

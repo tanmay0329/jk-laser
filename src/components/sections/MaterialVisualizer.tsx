@@ -13,7 +13,7 @@ export default function MaterialVisualizer() {
   const [activeMaterial, setActiveMaterial] = useState(materials[1]);
 
   return (
-    <section className="py-24 bg-[#0A0A0A] relative border-t border-white/5 overflow-hidden">
+    <section id="visualizer" className="py-24 bg-transparent relative border-y border-white/5 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -52,11 +52,12 @@ export default function MaterialVisualizer() {
                   onClick={() => {
                     setActiveMaterial(material);
                     document.documentElement.style.setProperty('--cursor-color', material.cursorColor);
+                    window.dispatchEvent(new CustomEvent('activate-custom-cursor'));
                   }}
-                  className={`flex items-center gap-4 p-4 rounded-sm border transition-all duration-300 text-left ${
+                  className={`flex items-center gap-4 p-4 rounded-2xl border transition-all duration-300 text-left ${
                     activeMaterial.id === material.id 
                       ? "border-primary bg-primary/10 scale-105 shadow-[0_0_15px_rgba(212,175,55,0.2)]" 
-                      : "border-white/10 bg-[#121212] hover:border-white/30"
+                      : "border-white/5 bg-[#1A1500]/60 backdrop-blur-xl hover:border-white/30"
                   }`}
                 >
                   <div className={`w-12 h-12 shrink-0 rounded-full bg-gradient-to-br ${material.color} shadow-inner border border-black/50`} />
@@ -74,7 +75,7 @@ export default function MaterialVisualizer() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.8 }}
-            className="w-full lg:w-2/3 aspect-square max-w-[500px] relative rounded-sm overflow-hidden border border-white/10 bg-[#050505] shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] flex items-center justify-center p-4 md:p-8"
+            className="w-full lg:w-2/3 aspect-square max-w-[500px] relative rounded-2xl overflow-hidden border border-white/5 bg-[#1A1500]/60 backdrop-blur-xl shadow-[inset_0_0_50px_rgba(0,0,0,0.8),0_8px_32px_rgba(0,0,0,0.5)] flex items-center justify-center p-4 md:p-8"
           >
             <AnimatePresence mode="wait">
               <motion.div

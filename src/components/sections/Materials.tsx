@@ -29,12 +29,12 @@ const materials = [
 
 export default function Materials() {
   return (
-    <section id="materials" className="py-24 bg-[#050505] relative border-b border-white/5 overflow-hidden">
+    <section id="materials" className="py-24 bg-transparent relative border-b border-white/5 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6 }}
           className="text-center md:text-left mb-12"
         >
@@ -63,38 +63,44 @@ export default function Materials() {
                 stiffness: 120,
                 damping: 20
               }}
-              className="group relative rounded-sm overflow-hidden border border-white/10 bg-[#121212] flex flex-col will-change-transform transform-gpu"
+              className="group relative flex flex-col bg-[#1A1500]/60 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-colors duration-500 will-change-transform transform-gpu shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             >
-              <div className="h-40 overflow-hidden relative">
-                <div className="absolute inset-0 bg-black/40 md:group-hover:bg-transparent transition-colors duration-500 z-10 hidden md:block" />
-                <img 
-                  src={material.image} 
-                  alt={material.name}
-                  className="w-full h-full object-cover filter md:grayscale md:group-hover:grayscale-0 transform md:group-hover:scale-110 transition-all duration-700"
-                />
-                <div className="absolute bottom-0 left-0 w-full p-4 z-20 bg-gradient-to-t from-black to-transparent">
-                  <h3 className="font-heading text-xl font-bold text-white tracking-widest uppercase">{material.name}</h3>
-                </div>
-              </div>
-              
-              <div className="p-5 flex flex-col grow">
-                <div className="mb-4">
-                  <p className="text-xs text-primary uppercase tracking-wider font-semibold mb-2">Benefits</p>
-                  <ul className="space-y-1.5">
-                    {material.benefits.map((benefit, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                        <span>{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: index * 0.3 }}
+                className="flex flex-col h-full w-full"
+              >
+                <div className="h-40 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-black/40 md:group-hover:bg-transparent transition-colors duration-500 z-10 hidden md:block" />
+                  <img 
+                    src={material.image} 
+                    alt={material.name}
+                    className="w-full h-full object-cover filter md:grayscale md:group-hover:grayscale-0 transform md:group-hover:scale-110 transition-all duration-700"
+                  />
+                  <div className="absolute bottom-0 left-0 w-full p-4 z-20 bg-gradient-to-t from-black to-transparent">
+                    <h3 className="font-heading text-xl font-bold text-white tracking-widest uppercase">{material.name}</h3>
+                  </div>
                 </div>
                 
-                <div className="mt-auto pt-4 border-t border-white/10">
-                  <p className="text-xs text-primary uppercase tracking-wider font-semibold mb-1">Recommended For</p>
-                  <p className="text-sm text-white/80">{material.recommended}</p>
+                <div className="p-5 flex flex-col grow">
+                  <div className="mb-4">
+                    <p className="text-xs text-primary uppercase tracking-wider font-semibold mb-2">Benefits</p>
+                    <ul className="space-y-1.5">
+                      {material.benefits.map((benefit, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="mt-auto pt-4 border-t border-white/10">
+                    <p className="text-xs text-primary uppercase tracking-wider font-semibold mb-1">Recommended For</p>
+                    <p className="text-sm text-white/80">{material.recommended}</p>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
             );
           })}
