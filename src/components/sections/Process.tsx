@@ -17,7 +17,7 @@ export default function Process() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -36,7 +36,7 @@ export default function Process() {
           <motion.div 
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-primary via-[#F3E5AB] to-primary origin-left"
           />
@@ -52,7 +52,7 @@ export default function Process() {
                   key={process.id}
                   initial={{ opacity: 0, x: initialX, y: 20 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  viewport={{ once: false }}
+                  viewport={{ once: true }}
                   transition={{ 
                     duration: 0.7, 
                     delay: index * 0.15,

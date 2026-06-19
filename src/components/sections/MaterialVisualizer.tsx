@@ -18,7 +18,7 @@ export default function MaterialVisualizer() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -41,7 +41,7 @@ export default function MaterialVisualizer() {
                   key={material.id}
                   initial={{ opacity: 0, x: initialX }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{ 
                     duration: 0.7, 
                     delay: index * 0.1,
@@ -73,7 +73,7 @@ export default function MaterialVisualizer() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8 }}
             className="w-full lg:w-2/3 aspect-square max-w-[500px] relative rounded-2xl overflow-hidden border border-white/5 bg-[#1A1500]/60 backdrop-blur-xl shadow-[inset_0_0_50px_rgba(0,0,0,0.8),0_8px_32px_rgba(0,0,0,0.5)] flex items-center justify-center p-4 md:p-8"
           >

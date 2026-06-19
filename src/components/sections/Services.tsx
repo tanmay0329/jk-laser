@@ -12,7 +12,7 @@ const defaultServices = [
     filterName: "JK Building Elevation Design",
     image: "/images/services/elevation-designs.jpg",
     items: ["Commercial Exteriors", "Residential Facades", "Modern Elevations"],
-    icon: "🏢",
+    icon: "ðŸ¢",
   },
   {
     id: "elevation-design",
@@ -20,7 +20,7 @@ const defaultServices = [
     filterName: "JK Elevation Design",
     image: "/images/services/elevation-designs.jpg",
     items: ["Wall Panels", "CNC Screens", "Room Dividers"],
-    icon: "◨",
+    icon: "â—¨",
   },
   {
     id: "door",
@@ -28,7 +28,7 @@ const defaultServices = [
     filterName: "JK Door",
     image: "/images/services/gates-doors.jpg",
     items: ["Safety Doors", "Main Doors", "Custom Laser Doors"],
-    icon: "🚪",
+    icon: "ðŸšª",
   },
   {
     id: "gates",
@@ -36,7 +36,7 @@ const defaultServices = [
     filterName: "JK Gates",
     image: "/images/services/gates-doors.jpg",
     items: ["Main Gates", "Compound Gates", "Sliding Gates"],
-    icon: "⛩️",
+    icon: "â›©ï¸",
   },
   {
     id: "grill",
@@ -44,7 +44,7 @@ const defaultServices = [
     filterName: "JK Grill",
     image: "/images/services/grills.jpg",
     items: ["Window Grills", "Balcony Grills", "Safety Grills"],
-    icon: "🪟",
+    icon: "ðŸªŸ",
   },
   {
     id: "wall-art",
@@ -52,7 +52,7 @@ const defaultServices = [
     filterName: "JK Wall Art",
     image: "/images/services/wall-art.jpg",
     items: ["Interior Wall Art", "Metal Wall Decor", "Custom Art"],
-    icon: "✨",
+    icon: "âœ¨",
   },
 ];
 
@@ -75,7 +75,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -101,7 +101,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
               key={service.id}
               initial={{ opacity: 0, x: initialX, y: 20 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
               onClick={() => router.push(`/gallery?category=${encodeURIComponent(service.filterName)}`)}
               transition={{ 
                 duration: 0.5, 

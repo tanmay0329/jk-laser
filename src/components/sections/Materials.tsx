@@ -34,7 +34,7 @@ export default function Materials() {
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center md:text-left mb-12"
         >
@@ -55,7 +55,7 @@ export default function Materials() {
               key={material.id}
               initial={{ opacity: 0, x: initialX, y: 20, scale: 0.95 }}
               whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ 
                 duration: 0.5, 
                 delay: index * 0.1,

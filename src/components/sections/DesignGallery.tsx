@@ -156,7 +156,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -211,7 +211,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                       layout
                       initial={{ opacity: 0, x: initialX, scale: 0.9 }}
                       whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                      viewport={{ once: false, amount: 0.1 }}
+                      viewport={{ once: true, amount: 0.1 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ 
                         duration: 0.5, 

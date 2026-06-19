@@ -5,7 +5,7 @@ import { useInView, animate, motion } from "framer-motion";
 
 function Counter({ from, to, duration, suffix = "" }: { from: number, to: number, duration: number, suffix?: string }) {
   const nodeRef = useRef<HTMLSpanElement>(null);
-  const inView = useInView(nodeRef, { once: false });
+  const inView = useInView(nodeRef, { once: true });
 
   useEffect(() => {
     if (!inView && nodeRef.current) {
@@ -51,7 +51,7 @@ export default function Stats() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col items-center justify-center"
             >

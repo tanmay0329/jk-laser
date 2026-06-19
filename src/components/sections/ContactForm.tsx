@@ -18,7 +18,7 @@ export default function ContactForm() {
     e.preventDefault();
     
     // Construct WhatsApp message
-    const message = `*New Custom Design Request* 🛠️
+    const message = `*New Custom Design Request* ðŸ› ï¸
     
 *Name:* ${formData.name}
 *Phone:* ${formData.phone}
@@ -54,7 +54,7 @@ ${formData.message}`;
             <motion.div 
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ 
                 duration: 0.8, 
                 type: "spring",
@@ -193,7 +193,7 @@ ${formData.message}`;
             <motion.div 
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ 
                 duration: 0.8, 
                 type: "spring",

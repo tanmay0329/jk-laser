@@ -58,7 +58,7 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -93,7 +93,7 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
                 key={item.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: false, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ 
                   duration: 0.6, 
                   delay: index * 0.15,

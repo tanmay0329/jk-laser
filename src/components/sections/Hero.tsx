@@ -84,11 +84,11 @@ export default function Hero() {
           className="hidden md:block w-full h-full object-cover filter grayscale opacity-10 mix-blend-overlay"
         />
         {/* Mobile Background Logo */}
-        <div className="block md:hidden absolute inset-x-0 top-0 w-full opacity-40 pointer-events-none">
+        <div className="block md:hidden absolute inset-x-0 top-0 w-full opacity-20 pointer-events-none">
           <img 
             src="/verticle_logo.png" 
             alt="Watermark Mobile" 
-            className="w-full h-auto object-cover object-top scale-[1.2] origin-top filter drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] mix-blend-overlay"
+            className="w-full h-auto object-cover object-top scale-[1.2] origin-top mix-blend-normal"
           />
         </div>
       </div>
