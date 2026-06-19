@@ -16,8 +16,41 @@ interface FeaturedProjectsProps {
   projects?: FeaturedProject[];
 }
 
+const fallbackProjects: FeaturedProject[] = [
+  {
+    id: "fallback-1",
+    title: "Premium Door Design",
+    image_url: "/images/slider/laser_cutting_1.png",
+    description: "An intricate laser-cut pattern designed for a premium modern entrance door, blending security with aesthetic elegance.",
+    order_index: 1,
+  },
+  {
+    id: "fallback-2",
+    title: "Architectural Mesh",
+    image_url: "/images/slider/mesh_pattern.png",
+    description: "A geometric mesh pattern commonly used for building facades and privacy screens.",
+    order_index: 2,
+  },
+  {
+    id: "fallback-3",
+    title: "Custom Building Facade",
+    image_url: "/images/slider/facade_1.png",
+    description: "Large-scale laser cut panels designed for exterior building elevations, providing both shading and a stunning visual identity.",
+    order_index: 3,
+  },
+  {
+    id: "fallback-4",
+    title: "Decorative Screen",
+    image_url: "/images/slider/laser_cutting_3.png",
+    description: "A delicate, nature-inspired decorative screen perfect for interior room dividers.",
+    order_index: 4,
+  }
+];
+
 export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProps) {
   const [selectedProject, setSelectedProject] = useState<FeaturedProject | null>(null);
+
+  const displayProjects = projects && projects.length > 0 ? projects : fallbackProjects;
 
   return (
     <section id="featured-projects" className="py-24 bg-black relative overflow-hidden">
@@ -45,7 +78,7 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
 
         {/* 2 in a row on mobile (2 rows), 4 in a row on desktop */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-0">
-          {projects.slice(0, 4).map((item, index) => {
+          {displayProjects.slice(0, 4).map((item, index) => {
             // Define 4 distinct window shapes
             const windowShapes = [
               "rounded-[10rem_10rem_1rem_1rem]", // Arch

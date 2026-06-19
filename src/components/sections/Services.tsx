@@ -85,7 +85,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary"></div>
           </div>
           <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-6">
-            JK <span className="text-primary">SERVICES</span>
+            JK <span className="text-primary">CATALOGS</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
             From monumental entrance gates to delicate interior screens, our precision laser cutting services cover a wide spectrum of architectural and decorative needs.

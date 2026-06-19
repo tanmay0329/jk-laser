@@ -7,7 +7,7 @@ const materials = [
   {
     id: "ms",
     name: "MILD STEEL",
-    image: "https://images.unsplash.com/photo-1535813547-99c456a41d4a?q=80&w=800&auto=format&fit=crop", // placeholder
+    image: "/images/mild_steel.png", // Custom generated high-res mild steel texture
     benefits: ["Highly durable", "Cost-effective", "Excellent for powder coating"],
     recommended: "Main Gates, Boundary Grills",
   },

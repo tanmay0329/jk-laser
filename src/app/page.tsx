@@ -12,6 +12,7 @@ import Testimonials from "@/components/sections/Testimonials";
 import ContactForm from "@/components/sections/ContactForm";
 import GlowingDivider from "@/components/ui/GlowingDivider";
 import { createClient } from "@/utils/supabase/server";
+import Vision from "@/components/sections/Vision";
 
 // Revalidate this page every hour (3600 seconds) or when data changes
 export const revalidate = 3600;
@@ -47,10 +48,11 @@ export default async function Home() {
       <GlowingDivider />
       <FeaturedProjects projects={featuredProjects || []} />
       <Services categoryThumbnails={categoryThumbnails} />
+      <Vision />
       <MaterialVisualizer />
       <GlowingDivider />
       <Projects />
-      <Process />
+      {/* <Process /> */}
       <Materials />
       <Stats />
       <Testimonials testimonials={testimonials || []} />

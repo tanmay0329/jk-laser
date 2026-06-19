@@ -83,9 +83,13 @@ export default function Hero() {
           alt="Watermark Desktop" 
           className="hidden md:block w-full h-full object-cover filter grayscale opacity-10 mix-blend-overlay"
         />
-        {/* Mobile Background Text */}
-        <div className="block md:hidden text-[90vw] font-heading font-black text-transparent bg-clip-text bg-gradient-to-b from-[#D4AF37] via-[#FFF8D6] to-[#AA7700] opacity-30 leading-none tracking-tighter select-none drop-shadow-[0_0_40px_rgba(212,175,55,0.3)] transform -translate-y-45">
-          JK
+        {/* Mobile Background Logo */}
+        <div className="block md:hidden absolute inset-x-0 top-0 w-full opacity-40 pointer-events-none">
+          <img 
+            src="/verticle_logo.png" 
+            alt="Watermark Mobile" 
+            className="w-full h-auto object-cover object-top scale-[1.2] origin-top filter drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] mix-blend-overlay"
+          />
         </div>
       </div>
 
@@ -120,6 +124,9 @@ export default function Hero() {
             
             <p className="text-lg md:text-xl text-white/80 max-w-xl font-light leading-relaxed">
               We create elegant laser-cut gates, railings, decorative panels, name plates and custom metal artwork with unmatched precision and perfect finish.
+              <span className="block mt-4 text-xl md:text-2xl font-semibold text-primary italic font-heading">
+                "JK Laser – We Make What You Think."
+              </span>
             </p>
             
             <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 mt-4 w-full md:w-auto">

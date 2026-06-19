@@ -234,10 +234,12 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                       />
                       
                       {/* Image Watermark */}
-                      <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10">
-                        <span className="text-white/30 font-heading font-black text-4xl sm:text-5xl lg:text-3xl transform -rotate-[30deg] tracking-widest whitespace-nowrap select-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                          JK LASER
-                        </span>
+                      <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10 opacity-30 mix-blend-overlay">
+                        <img 
+                          src="/verticle_logo.png" 
+                          alt="Watermark" 
+                          className="w-1/2 h-auto object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                        />
                       </div>
                       
                       {/* Hover Overlay */}
@@ -311,10 +313,12 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                   onDragStart={(e) => e.preventDefault()}
                 />
                 {/* Lightbox Watermark */}
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-20 mix-blend-overlay">
-                  <span className="text-white/40 font-heading font-black text-[10vw] sm:text-[6rem] transform -rotate-[30deg] tracking-widest whitespace-nowrap select-none drop-shadow-lg">
-                    JK LASER BEED
-                  </span>
+                <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-20 opacity-30 mix-blend-overlay">
+                  <img 
+                    src="/verticle_logo.png" 
+                    alt="Watermark" 
+                    className="w-[40%] md:w-[30%] h-auto object-contain filter drop-shadow-lg"
+                  />
                 </div>
               </div>
               <div className="bg-black/80 px-8 py-3 rounded-full border border-primary/30 flex items-center gap-4">

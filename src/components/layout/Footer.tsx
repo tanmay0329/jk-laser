@@ -98,7 +98,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-center text-primary text-xs font-bold uppercase tracking-widest mt-2">
-              "Precision Cut. Perfect Finish."
+              "JK Laser – We Make What You Think"
             </p>
           </div>
         </div>

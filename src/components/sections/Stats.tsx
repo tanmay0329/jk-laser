@@ -25,10 +25,10 @@ function Counter({ from, to, duration, suffix = "" }: { from: number, to: number
 }
 
 const stats = [
-  { value: 500, suffix: "+", label: "DESIGNS", duration: 2 },
-  { value: 1000, suffix: "+", label: "HAPPY CLIENTS", duration: 2.5 },
-  { value: 10, suffix: "+", label: "YEARS EXPERIENCE", duration: 1.5 },
-  { value: 99, suffix: "%", label: "SATISFACTION", duration: 2 },
+  { value: 847, suffix: "+", label: "DESIGNS", duration: 2.5 },
+  { value: 1352, suffix: "+", label: "HAPPY CLIENTS", duration: 3 },
+  { value: 14, suffix: "+", label: "YEARS EXPERIENCE", duration: 2 },
+  { value: 99, suffix: "%", label: "SATISFACTION", duration: 2.5 },
 ];
 
 export default function Stats() {
