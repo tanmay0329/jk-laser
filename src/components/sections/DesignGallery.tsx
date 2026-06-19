@@ -238,15 +238,9 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                       />
                       
                       {/* Image Watermark */}
-                      <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10 opacity-30 mix-blend-overlay">
-                        <div className="relative w-1/2 h-1/2">
-                          <Image 
-                            src="/verticle_logo.webp" 
-                            alt="Watermark" 
-                            fill
-                            sizes="20vw"
-                            className="object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-                          />
+                      <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10 opacity-40 mix-blend-overlay">
+                        <div className="transform -rotate-45 text-white font-heading font-black text-2xl sm:text-4xl tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] whitespace-nowrap">
+                          JK LASER BEED
                         </div>
                       </div>
                       
@@ -303,10 +297,10 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
             onClick={() => setLightboxImage(null)}
           >
             <button 
-              className="absolute top-6 right-6 text-white/50 hover:text-white bg-white/10 p-2 rounded-full transition-colors"
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 p-2 md:p-3 rounded-full transition-all z-[110] shadow-xl border border-white/10"
               onClick={(e) => { e.stopPropagation(); setLightboxImage(null); }}
             >
-              <X size={24} />
+              <X size={24} className="w-5 h-5 md:w-6 md:h-6" />
             </button>
             <div 
               className="relative max-w-5xl w-full max-h-full flex flex-col items-center gap-4"
@@ -324,15 +318,9 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                   onDragStart={(e) => e.preventDefault()}
                 />
                 {/* Lightbox Watermark */}
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-20 opacity-30 mix-blend-overlay">
-                  <div className="relative w-[40%] md:w-[30%] h-1/2">
-                    <Image 
-                      src="/verticle_logo.webp" 
-                      alt="Watermark" 
-                      fill
-                      sizes="30vw"
-                      className="object-contain filter drop-shadow-lg"
-                    />
+                <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-20 opacity-40 mix-blend-overlay">
+                  <div className="transform -rotate-45 text-white font-heading font-black text-4xl md:text-7xl tracking-[0.2em] drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] whitespace-nowrap">
+                    JK LASER BEED
                   </div>
                 </div>
               </div>

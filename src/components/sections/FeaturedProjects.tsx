@@ -141,10 +141,10 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
             onClick={() => setSelectedProject(null)}
           >
             <button 
-              className="absolute top-6 right-6 text-white/50 hover:text-white bg-white/10 p-2 rounded-full transition-colors z-50"
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 p-2 md:p-3 rounded-full transition-all z-[110] shadow-xl border border-white/10"
               onClick={(e) => { e.stopPropagation(); setSelectedProject(null); }}
             >
-              <X size={24} />
+              <X size={24} className="w-5 h-5 md:w-6 md:h-6" />
             </button>
             
             <motion.div 
