@@ -1,5 +1,5 @@
 import Hero from "@/components/sections/Hero";
-import { getGalleryImages } from "@/lib/gallery";
+
 import GlowingDivider from "@/components/ui/GlowingDivider";
 import { createClient } from "@supabase/supabase-js";
 import dynamic from "next/dynamic";
@@ -35,13 +35,20 @@ export default async function Home() {
     .select('*')
     .order('created_at', { ascending: false });
 
-  // Get gallery images for the category thumbnails
-  const galleryImages = getGalleryImages();
+  // Fetch Gallery Images for Thumbnails
+  const { data: galleryDesigns } = await supabase
+    .from('gallery_designs')
+    .select('category, image_url')
+    .order('created_at', { ascending: false });
+
   const categoryThumbnails: Record<string, string> = {};
-  for (const item of galleryImages) {
-    const uppercaseCategory = item.category.toUpperCase();
-    if (!categoryThumbnails[uppercaseCategory]) {
-      categoryThumbnails[uppercaseCategory] = item.image;
+  if (galleryDesigns) {
+    for (const item of galleryDesigns) {
+      if (!item.category) continue;
+      const uppercaseCategory = item.category.toUpperCase();
+      if (!categoryThumbnails[uppercaseCategory]) {
+        categoryThumbnails[uppercaseCategory] = item.image_url;
+      }
     }
   }
 
