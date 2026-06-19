@@ -34,7 +34,7 @@ export default function RootLayout({
         <ScrollManager />
         <CustomCursor />
         <Navbar />
-        <main className="flex-1 w-full pt-[72px] md:pt-[88px] relative z-10">{children}</main>
+        <main className="flex-1 w-full pt-[72px] md:pt-[88px] relative">{children}</main>
         <Footer />
         <FloatingWhatsApp />
 
