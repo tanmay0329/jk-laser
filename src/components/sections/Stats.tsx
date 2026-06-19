@@ -5,9 +5,14 @@ import { useInView, animate, motion } from "framer-motion";
 
 function Counter({ from, to, duration, suffix = "" }: { from: number, to: number, duration: number, suffix?: string }) {
   const nodeRef = useRef<HTMLSpanElement>(null);
-  const inView = useInView(nodeRef, { once: true });
+  const inView = useInView(nodeRef, { once: false });
 
   useEffect(() => {
+    if (!inView && nodeRef.current) {
+      // Reset text when out of view so the animation restarts smoothly
+      nodeRef.current.textContent = from.toString() + suffix;
+    }
+
     if (inView && nodeRef.current) {
       const controls = animate(from, to, {
         duration,
@@ -33,7 +38,7 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="py-16 bg-[#0A0A0A] border-y border-white/10 relative overflow-hidden">
+    <section className="py-16 bg-transparent border-y border-white/10 relative overflow-hidden">
       {/* Decorative lines */}
       <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-white/5 to-transparent hidden lg:block" />
       <div className="absolute top-0 left-2/4 w-px h-full bg-gradient-to-b from-transparent via-white/5 to-transparent hidden lg:block" />
@@ -46,7 +51,7 @@ export default function Stats() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col items-center justify-center"
             >
