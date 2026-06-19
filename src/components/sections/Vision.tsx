@@ -82,7 +82,7 @@ export default function Vision() {
               <div className="absolute inset-0 bg-[#1A1500]/60 backdrop-blur-xl rounded-sm border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.15)] flex items-center justify-center">
                 
                 <img 
-                  src="/images/vision_building.png" 
+                  src="/images/vision_building.webp" 
                   alt="Futuristic Building Vision" 
                   className="w-full h-full object-cover mix-blend-screen opacity-80 filter contrast-125"
                 />

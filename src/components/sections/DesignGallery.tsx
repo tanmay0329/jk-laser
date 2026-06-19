@@ -236,7 +236,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                       {/* Image Watermark */}
                       <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10 opacity-30 mix-blend-overlay">
                         <img 
-                          src="/verticle_logo.png" 
+                          src="/verticle_logo.webp" 
                           alt="Watermark" 
                           className="w-1/2 h-auto object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
                         />
@@ -315,7 +315,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                 {/* Lightbox Watermark */}
                 <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-20 opacity-30 mix-blend-overlay">
                   <img 
-                    src="/verticle_logo.png" 
+                    src="/verticle_logo.webp" 
                     alt="Watermark" 
                     className="w-[40%] md:w-[30%] h-auto object-contain filter drop-shadow-lg"
                   />

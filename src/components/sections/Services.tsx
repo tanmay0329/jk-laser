@@ -12,7 +12,7 @@ const defaultServices = [
     filterName: "JK Building Elevation Design",
     image: "/images/services/elevation-designs.jpg",
     items: ["Commercial Exteriors", "Residential Facades", "Modern Elevations"],
-    icon: "ðŸ¢",
+    icon: "🏢",
   },
   {
     id: "elevation-design",
@@ -20,7 +20,7 @@ const defaultServices = [
     filterName: "JK Elevation Design",
     image: "/images/services/elevation-designs.jpg",
     items: ["Wall Panels", "CNC Screens", "Room Dividers"],
-    icon: "â—¨",
+    icon: "◨",
   },
   {
     id: "door",
@@ -28,7 +28,7 @@ const defaultServices = [
     filterName: "JK Door",
     image: "/images/services/gates-doors.jpg",
     items: ["Safety Doors", "Main Doors", "Custom Laser Doors"],
-    icon: "ðŸšª",
+    icon: "🚪",
   },
   {
     id: "gates",
@@ -36,7 +36,7 @@ const defaultServices = [
     filterName: "JK Gates",
     image: "/images/services/gates-doors.jpg",
     items: ["Main Gates", "Compound Gates", "Sliding Gates"],
-    icon: "â›©ï¸",
+    icon: "⛩️",
   },
   {
     id: "grill",
@@ -44,7 +44,7 @@ const defaultServices = [
     filterName: "JK Grill",
     image: "/images/services/grills.jpg",
     items: ["Window Grills", "Balcony Grills", "Safety Grills"],
-    icon: "ðŸªŸ",
+    icon: "🪟",
   },
   {
     id: "wall-art",
@@ -52,7 +52,7 @@ const defaultServices = [
     filterName: "JK Wall Art",
     image: "/images/services/wall-art.jpg",
     items: ["Interior Wall Art", "Metal Wall Decor", "Custom Art"],
-    icon: "âœ¨",
+    icon: "✨",
   },
 ];
 

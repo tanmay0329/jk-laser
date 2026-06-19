@@ -37,7 +37,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <img src="/new_logo.png" alt="JK Laser Beed Logo" className="h-12 w-auto object-contain" />
+            <img src="/new_logo.webp" alt="JK Laser Beed Logo" className="h-12 w-auto object-contain" />
           </Link>
 
           {/* Desktop Navigation */}

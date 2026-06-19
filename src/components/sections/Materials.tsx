@@ -7,7 +7,7 @@ const materials = [
   {
     id: "ms",
     name: "MILD STEEL",
-    image: "/images/mild_steel.png", // Custom generated high-res mild steel texture
+    image: "/images/mild_steel.webp", // Custom generated high-res mild steel texture
     benefits: ["Highly durable", "Cost-effective", "Excellent for powder coating"],
     recommended: "Main Gates, Boundary Grills",
   },
@@ -21,7 +21,7 @@ const materials = [
   {
     id: "gold-plated",
     name: "GOLD PLATED METAL",
-    image: "/images/gold_metal.png", // Custom generated high-res gold texture
+    image: "/images/gold_metal.webp", // Custom generated high-res gold texture
     benefits: ["Luxurious look", "Tarnish resistant", "Extremely elegant"],
     recommended: "Interior Decor, Custom Artwork, Name Plates",
   },

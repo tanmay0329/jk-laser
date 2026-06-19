@@ -33,12 +33,12 @@ export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const heroImages = [
-    "/images/slider/laser_cutting_1.png",
-    "/images/slider/mesh_pattern.png",
-    "/images/slider/laser_cutting_2.png",
-    "/images/slider/facade_1.png",
-    "/images/slider/laser_cutting_3.png",
-    "/images/slider/macro_1.png"
+    "/images/slider/laser_cutting_1.webp",
+    "/images/slider/mesh_pattern.webp",
+    "/images/slider/laser_cutting_2.webp",
+    "/images/slider/facade_1.webp",
+    "/images/slider/laser_cutting_3.webp",
+    "/images/slider/macro_1.webp"
   ];
   
   useEffect(() => {
@@ -79,14 +79,14 @@ export default function Hero() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         {/* Desktop Banner Logo */}
         <img 
-          src="/jk-laser-banner.png" 
+          src="/jk-laser-banner.webp" 
           alt="Watermark Desktop" 
           className="hidden md:block w-full h-full object-cover filter grayscale opacity-10 mix-blend-overlay"
         />
         {/* Mobile Background Logo */}
         <div className="block md:hidden absolute inset-x-0 top-0 w-full opacity-20 pointer-events-none">
           <img 
-            src="/verticle_logo.png" 
+            src="/verticle_logo.webp" 
             alt="Watermark Mobile" 
             className="w-full h-auto object-cover object-top scale-[1.2] origin-top mix-blend-normal"
           />

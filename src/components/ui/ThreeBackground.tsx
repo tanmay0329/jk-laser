@@ -21,7 +21,7 @@ export default function ThreeBackground() {
           repeat: Infinity, 
           ease: "easeInOut" 
         }}
-        className="absolute inset-0 bg-[url('/images/background_sparks.png')] bg-cover bg-center mix-blend-screen" 
+        className="absolute inset-0 bg-[url('/images/background_sparks.webp')] bg-cover bg-center mix-blend-screen" 
       />
       
       {/* Laser Beams Background */}

@@ -20,28 +20,28 @@ const fallbackProjects: FeaturedProject[] = [
   {
     id: "fallback-1",
     title: "Premium Door Design",
-    image_url: "/images/slider/laser_cutting_1.png",
+    image_url: "/images/slider/laser_cutting_1.webp",
     description: "An intricate laser-cut pattern designed for a premium modern entrance door, blending security with aesthetic elegance.",
     order_index: 1,
   },
   {
     id: "fallback-2",
     title: "Architectural Mesh",
-    image_url: "/images/slider/mesh_pattern.png",
+    image_url: "/images/slider/mesh_pattern.webp",
     description: "A geometric mesh pattern commonly used for building facades and privacy screens.",
     order_index: 2,
   },
   {
     id: "fallback-3",
     title: "Custom Building Facade",
-    image_url: "/images/slider/facade_1.png",
+    image_url: "/images/slider/facade_1.webp",
     description: "Large-scale laser cut panels designed for exterior building elevations, providing both shading and a stunning visual identity.",
     order_index: 3,
   },
   {
     id: "fallback-4",
     title: "Decorative Screen",
-    image_url: "/images/slider/laser_cutting_3.png",
+    image_url: "/images/slider/laser_cutting_3.webp",
     description: "A delicate, nature-inspired decorative screen perfect for interior room dividers.",
     order_index: 4,
   }
