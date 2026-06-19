@@ -47,7 +47,8 @@ export default async function Home() {
       if (!item.category) continue;
       const uppercaseCategory = item.category.toUpperCase();
       if (!categoryThumbnails[uppercaseCategory]) {
-        categoryThumbnails[uppercaseCategory] = decodeURIComponent(item.image_url);
+        const isJfif = item.image_url.toLowerCase().endsWith('.jfif');
+        categoryThumbnails[uppercaseCategory] = isJfif ? item.image_url : decodeURIComponent(item.image_url);
       }
     }
   }
