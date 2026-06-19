@@ -32,7 +32,7 @@ export default function ThreeBackground() {
           y: ["-10vh", "110vh", "-10vh"],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-0 left-[-50%] w-[200%] h-[2px] bg-primary/40 shadow-[0_0_50px_10px_rgba(212,175,55,0.6)] mix-blend-normal md:mix-blend-screen"
+        className="absolute top-0 left-[-50%] w-[200%] h-[2px] bg-primary/40 shadow-[0_0_30px_5px_rgba(212,175,55,0.6)] mix-blend-screen will-change-transform transform-gpu"
       />
 
       {/* Vertical Sweeping Laser */}
@@ -41,7 +41,7 @@ export default function ThreeBackground() {
           x: ["-10vw", "110vw", "-10vw"],
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-        className="absolute left-0 top-[-50%] w-[2px] h-[200%] bg-primary/30 shadow-[0_0_40px_8px_rgba(212,175,55,0.4)] mix-blend-normal md:mix-blend-screen"
+        className="absolute left-0 top-[-50%] w-[2px] h-[200%] bg-primary/30 shadow-[0_0_30px_5px_rgba(212,175,55,0.4)] mix-blend-screen will-change-transform transform-gpu"
       />
 
       {/* Diagonal Laser 1 */}
@@ -52,7 +52,7 @@ export default function ThreeBackground() {
           y: ["-50vh", "150vh"],
         }}
         transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-        className="absolute top-0 left-0 w-[2px] h-[150vh] bg-[#ffaa00]/50 shadow-[0_0_40px_10px_rgba(255,170,0,0.5)] origin-top-left mix-blend-normal md:mix-blend-screen hidden sm:block"
+        className="absolute top-0 left-0 w-[2px] h-[150vh] bg-[#ffaa00]/50 shadow-[0_0_30px_5px_rgba(255,170,0,0.5)] origin-top-left mix-blend-screen hidden sm:block will-change-transform transform-gpu"
       />
 
       {/* Diagonal Laser 2 */}
@@ -63,7 +63,7 @@ export default function ThreeBackground() {
           y: ["-50vh", "150vh"],
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 6 }}
-        className="absolute top-0 right-0 w-[2px] h-[150vh] bg-primary/40 shadow-[0_0_40px_10px_rgba(212,175,55,0.5)] origin-top-right mix-blend-normal md:mix-blend-screen hidden sm:block"
+        className="absolute top-0 right-0 w-[2px] h-[150vh] bg-primary/40 shadow-[0_0_30px_5px_rgba(212,175,55,0.5)] origin-top-right mix-blend-screen hidden sm:block will-change-transform transform-gpu"
       />
 
       {/* Premium Grain / Noise Overlay (Vercel/Stripe style) */}

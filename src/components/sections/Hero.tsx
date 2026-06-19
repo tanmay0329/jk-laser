@@ -94,6 +94,7 @@ export default function Hero() {
             src="/verticle_logo.webp" 
             alt="Watermark Mobile" 
             fill
+            priority
             sizes="100vw"
             className="object-cover object-top scale-[1.2] origin-top mix-blend-normal"
           />
@@ -188,7 +189,7 @@ export default function Hero() {
                       alt="Hero Showcase"
                       fill
                       priority
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      sizes="(max-width: 768px) 100vw, 450px"
                       className="object-cover"
                     />
                   </motion.div>

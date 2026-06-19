@@ -133,7 +133,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
                   src={displayImage}
                   alt={service.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, 250px"
                   className="z-20 object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] p-2"
                 />
               </div>
