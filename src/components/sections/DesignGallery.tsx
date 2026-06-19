@@ -3,6 +3,7 @@
 import { useState, useRef, useMemo, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Search, ZoomIn, X, ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 export interface GalleryItem {
   id: string;
@@ -223,23 +224,29 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                       className="group relative rounded-2xl overflow-hidden border border-white/5 bg-[#1A1500]/60 backdrop-blur-xl will-change-transform transform-gpu cursor-pointer block shadow-lg hover:border-primary/30 transition-colors duration-500"
                       onClick={() => setLightboxImage({ url: item.image, number: item.designNumber })}
                     >
-                      <img
+                      <Image
                         src={item.image}
                         alt={`Design ${item.designNumber}`}
+                        width={600}
+                        height={600}
+                        sizes="(max-width: 768px) 50vw, 25vw"
                         className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110 select-none block"
-                        loading="lazy"
                         onContextMenu={(e) => e.preventDefault()}
                         onDragStart={(e) => e.preventDefault()}
-                        onLoad={(e) => handleImageLoad(item.id, e)}
+                        onLoad={(e) => handleImageLoad(item.id, e as any)}
                       />
                       
                       {/* Image Watermark */}
                       <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10 opacity-30 mix-blend-overlay">
-                        <img 
-                          src="/verticle_logo.webp" 
-                          alt="Watermark" 
-                          className="w-1/2 h-auto object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-                        />
+                        <div className="relative w-1/2 h-1/2">
+                          <Image 
+                            src="/verticle_logo.webp" 
+                            alt="Watermark" 
+                            fill
+                            sizes="20vw"
+                            className="object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                          />
+                        </div>
                       </div>
                       
                       {/* Hover Overlay */}
@@ -304,21 +311,27 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
               className="relative max-w-5xl w-full max-h-full flex flex-col items-center gap-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative max-w-full flex justify-center">
-                <img 
+              <div className="relative w-[90vw] md:w-[80vw] h-[80vh] flex justify-center">
+                <Image 
                   src={lightboxImage.url} 
                   alt={lightboxImage.number} 
-                  className="max-w-full max-h-[80vh] object-contain rounded-sm border border-white/20 relative z-10 select-none"
+                  fill
+                  sizes="100vw"
+                  className="object-contain rounded-sm border border-white/20 select-none p-2"
                   onContextMenu={(e) => e.preventDefault()}
                   onDragStart={(e) => e.preventDefault()}
                 />
                 {/* Lightbox Watermark */}
                 <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-20 opacity-30 mix-blend-overlay">
-                  <img 
-                    src="/verticle_logo.webp" 
-                    alt="Watermark" 
-                    className="w-[40%] md:w-[30%] h-auto object-contain filter drop-shadow-lg"
-                  />
+                  <div className="relative w-[40%] md:w-[30%] h-1/2">
+                    <Image 
+                      src="/verticle_logo.webp" 
+                      alt="Watermark" 
+                      fill
+                      sizes="30vw"
+                      className="object-contain filter drop-shadow-lg"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="bg-[#1A1500]/80 backdrop-blur-xl px-8 py-3 rounded-full border border-primary/30 flex items-center gap-4 shadow-2xl">

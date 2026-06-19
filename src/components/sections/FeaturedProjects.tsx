@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import Image from "next/image";
 
 export interface FeaturedProject {
   id: string;
@@ -109,10 +110,12 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 }}
                   className="w-full h-full relative"
                 >
-                  <img
+                  <Image
                     src={item.image_url}
                     alt={item.title}
-                    className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-contain transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
@@ -153,11 +156,13 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
               onClick={(e) => e.stopPropagation()}
             >
               {/* Image side */}
-              <div className="w-full md:w-1/2 h-[40vh] md:h-[70vh] flex items-center justify-center bg-black/50 p-4">
-                <img 
+              <div className="relative w-full md:w-1/2 h-[40vh] md:h-[70vh] flex items-center justify-center bg-black/50 p-4">
+                <Image 
                   src={selectedProject.image_url} 
                   alt={selectedProject.title} 
-                  className="max-w-full max-h-full object-contain drop-shadow-2xl"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-contain drop-shadow-2xl p-4"
                 />
               </div>
               

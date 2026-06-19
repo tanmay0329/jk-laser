@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 
 const materials = [
   {
@@ -72,10 +73,12 @@ export default function Materials() {
               >
                 <div className="h-40 overflow-hidden relative">
                   <div className="absolute inset-0 bg-black/40 md:group-hover:bg-transparent transition-colors duration-500 z-10 hidden md:block" />
-                  <img 
+                  <Image 
                     src={material.image} 
                     alt={material.name}
-                    className="w-full h-full object-cover filter md:grayscale md:group-hover:grayscale-0 transform md:group-hover:scale-110 transition-all duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover filter md:grayscale md:group-hover:grayscale-0 transform md:group-hover:scale-110 transition-all duration-700"
                   />
                   <div className="absolute bottom-0 left-0 w-full p-4 z-20 bg-gradient-to-t from-black to-transparent">
                     <h3 className="font-heading text-xl font-bold text-white tracking-widest uppercase">{material.name}</h3>

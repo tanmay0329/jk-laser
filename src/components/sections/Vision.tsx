@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { TrendingUp, Cpu } from "lucide-react";
+import Image from "next/image";
 
 export default function Vision() {
   return (
@@ -81,10 +82,12 @@ export default function Vision() {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-sm border border-primary/30 transform rotate-6 scale-95 opacity-50" />
               <div className="absolute inset-0 bg-[#1A1500]/60 backdrop-blur-xl rounded-sm border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.15)] flex items-center justify-center">
                 
-                <img 
+                <Image 
                   src="/images/vision_building.webp" 
                   alt="Futuristic Building Vision" 
-                  className="w-full h-full object-cover mix-blend-screen opacity-80 filter contrast-125"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover mix-blend-screen opacity-80 filter contrast-125"
                 />
 
                 {/* Animated Overlay Elements */}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Globe, Camera, Video, MessagesSquare } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="flex flex-col gap-6">
             <Link href="/" className="flex items-center group">
-              <img src="/new_logo.webp" alt="JK Laser Beed Logo" className="h-16 w-auto object-contain" />
+              <Image src="/new_logo.webp" alt="JK Laser Beed Logo" width={64} height={64} className="h-16 w-auto object-contain" />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               We are committed to delivering precision laser cutting solutions

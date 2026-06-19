@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Scissors, Layers, Sparkles, Hexagon, Shield } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const defaultServices = [
   {
@@ -115,10 +116,12 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
               <div className="relative h-48 md:h-64 w-full overflow-hidden flex items-center justify-center">
                 {/* Blurred Background */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
-                  <img
+                  <Image
                     src={displayImage}
                     alt=""
-                    className="w-full h-full object-cover blur-xl opacity-40 scale-125"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover blur-xl opacity-40 scale-125"
                   />
                 </div>
                 
@@ -126,10 +129,12 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 z-10 pointer-events-none" />
                 
                 {/* Foreground uncropped image */}
-                <img
+                <Image
                   src={displayImage}
                   alt={service.title}
-                  className="relative z-20 w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] p-2"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="z-20 object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] p-2"
                 />
               </div>
               

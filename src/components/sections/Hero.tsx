@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { ChevronRight, FileText } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 // Sparkle component for background animation
 const Sparkle = ({ delay }: { delay: number }) => (
@@ -78,17 +79,23 @@ export default function Hero() {
       {/* Background Watermark Logo */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         {/* Desktop Banner Logo */}
-        <img 
-          src="/jk-laser-banner.webp" 
-          alt="Watermark Desktop" 
-          className="hidden md:block w-full h-full object-cover filter grayscale opacity-10 mix-blend-overlay"
-        />
+        <div className="hidden md:block absolute inset-0 opacity-10 mix-blend-overlay">
+          <Image 
+            src="/jk-laser-banner.webp" 
+            alt="Watermark Desktop" 
+            fill
+            sizes="100vw"
+            className="object-cover filter grayscale"
+          />
+        </div>
         {/* Mobile Background Logo */}
-        <div className="block md:hidden absolute inset-x-0 top-0 w-full opacity-20 pointer-events-none">
-          <img 
+        <div className="block md:hidden absolute inset-x-0 top-0 w-full h-full opacity-20 pointer-events-none">
+          <Image 
             src="/verticle_logo.webp" 
             alt="Watermark Mobile" 
-            className="w-full h-auto object-cover object-top scale-[1.2] origin-top mix-blend-normal"
+            fill
+            sizes="100vw"
+            className="object-cover object-top scale-[1.2] origin-top mix-blend-normal"
           />
         </div>
       </div>
@@ -174,9 +181,17 @@ export default function Hero() {
                     animate={{ opacity: 0.9, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 1.5, ease: "easeInOut" }}
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url('${heroImages[currentImageIndex]}')` }}
-                  />
+                    className="absolute inset-0"
+                  >
+                    <Image 
+                      src={heroImages[currentImageIndex]}
+                      alt="Hero Showcase"
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  </motion.div>
                 </AnimatePresence>
                 {/* Decorative Laser Cut Pattern Overlay - pure CSS representation */}
                 <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_45%,#D4AF37_49%,#D4AF37_51%,transparent_55%)] bg-[size:20px_20px] opacity-[0.15] pointer-events-none z-10"></div>

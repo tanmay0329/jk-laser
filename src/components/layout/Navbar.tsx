@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -37,7 +38,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <img src="/new_logo.webp" alt="JK Laser Beed Logo" className="h-12 w-auto object-contain" />
+            <Image src="/new_logo.webp" alt="JK Laser Beed Logo" width={48} height={48} className="h-12 w-auto object-contain" />
           </Link>
 
           {/* Desktop Navigation */}

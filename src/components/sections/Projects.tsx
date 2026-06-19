@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeftRight, Calendar, MapPin, Layers } from "lucide-react";
+import Image from "next/image";
 
 const projects = [
   {
@@ -54,17 +55,21 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
     >
       <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
         {/* Before Image */}
-        <img
+        <Image
           src={project.beforeImage}
           alt={`${project.title} Before`}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${showAfter ? 'opacity-0' : 'opacity-100'}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className={`object-cover transition-opacity duration-700 ease-in-out ${showAfter ? 'opacity-0' : 'opacity-100'}`}
         />
         
         {/* After Image */}
-        <img
+        <Image
           src={project.afterImage}
           alt={`${project.title} After`}
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out transform ${showAfter ? 'opacity-100 scale-105' : 'opacity-0 scale-100'}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className={`object-cover transition-all duration-700 ease-in-out transform ${showAfter ? 'opacity-100 scale-105' : 'opacity-0 scale-100'}`}
         />
         
         {/* Labels */}
