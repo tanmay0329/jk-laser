@@ -1,24 +1,27 @@
 import Hero from "@/components/sections/Hero";
 import { getGalleryImages } from "@/lib/gallery";
-import Services from "@/components/sections/Services";
-import DesignGallery from "@/components/sections/DesignGallery";
-import Projects from "@/components/sections/Projects";
-import FeaturedProjects from "@/components/sections/FeaturedProjects";
-import Process from "@/components/sections/Process";
-import Materials from "@/components/sections/Materials";
-import Stats from "@/components/sections/Stats";
-import MaterialVisualizer from "@/components/sections/MaterialVisualizer";
-import Testimonials from "@/components/sections/Testimonials";
-import ContactForm from "@/components/sections/ContactForm";
 import GlowingDivider from "@/components/ui/GlowingDivider";
-import { createClient } from "@/utils/supabase/server";
-import Vision from "@/components/sections/Vision";
+import { createClient } from "@supabase/supabase-js";
+import dynamic from "next/dynamic";
+
+const FeaturedProjects = dynamic(() => import("@/components/sections/FeaturedProjects"));
+const Services = dynamic(() => import("@/components/sections/Services"));
+const Vision = dynamic(() => import("@/components/sections/Vision"));
+const MaterialVisualizer = dynamic(() => import("@/components/sections/MaterialVisualizer"));
+const Projects = dynamic(() => import("@/components/sections/Projects"));
+const Materials = dynamic(() => import("@/components/sections/Materials"));
+const Stats = dynamic(() => import("@/components/sections/Stats"));
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials"));
+const ContactForm = dynamic(() => import("@/components/sections/ContactForm"));
 
 // Revalidate this page every hour (3600 seconds) or when data changes
 export const revalidate = 3600;
 
 export default async function Home() {
-  const supabase = await createClient();
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 
   // Fetch Featured Projects
   const { data: featuredProjects } = await supabase
