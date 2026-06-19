@@ -47,7 +47,7 @@ export default async function Home() {
       if (!item.category) continue;
       const uppercaseCategory = item.category.toUpperCase();
       if (!categoryThumbnails[uppercaseCategory]) {
-        categoryThumbnails[uppercaseCategory] = item.image_url;
+        categoryThumbnails[uppercaseCategory] = decodeURIComponent(item.image_url);
       }
     }
   }

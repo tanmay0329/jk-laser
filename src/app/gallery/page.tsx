@@ -21,7 +21,7 @@ export default async function GalleryPage() {
     id: img.id,
     category: img.category,
     designNumber: img.design_number,
-    image: img.image_url
+    image: decodeURIComponent(img.image_url)
   }));
 
   return (
