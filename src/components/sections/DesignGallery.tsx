@@ -229,6 +229,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                         alt={`Design ${item.designNumber}`}
                         width={600}
                         height={600}
+                        unoptimized={item.image.toLowerCase().endsWith('.jfif')}
                         sizes="(max-width: 768px) 50vw, 25vw"
                         className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110 select-none block"
                         onContextMenu={(e) => e.preventDefault()}
@@ -316,6 +317,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
                   src={lightboxImage.url} 
                   alt={lightboxImage.number} 
                   fill
+                  unoptimized={lightboxImage.url.toLowerCase().endsWith('.jfif')}
                   sizes="100vw"
                   className="object-contain rounded-sm border border-white/20 select-none p-2"
                   onContextMenu={(e) => e.preventDefault()}

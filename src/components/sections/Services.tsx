@@ -120,6 +120,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
                     src={displayImage}
                     alt=""
                     fill
+                    unoptimized={displayImage.toLowerCase().endsWith('.jfif')}
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover blur-xl opacity-40 scale-125"
                   />
@@ -133,6 +134,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
                   src={displayImage}
                   alt={service.title}
                   fill
+                  unoptimized={displayImage.toLowerCase().endsWith('.jfif')}
                   sizes="(max-width: 768px) 100vw, 250px"
                   className="z-20 object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] p-2"
                 />
