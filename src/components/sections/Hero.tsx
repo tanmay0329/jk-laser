@@ -105,7 +105,7 @@ export default function Hero({ customImages }: HeroProps = {}) {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none hidden md:block" />
 
       {/* Background Watermark Logo */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
+      <div className="absolute inset-x-0 -top-24 bottom-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         {/* Desktop Banner Logo */}
         <div className="hidden md:block absolute inset-0 opacity-[0.05]">
           <Image 
@@ -139,7 +139,7 @@ export default function Hero({ customImages }: HeroProps = {}) {
       )}
 
       {/* Content */}
-      <div className="container relative z-20 mx-auto px-4 md:px-6 h-full flex items-center justify-center mt-20 md:mt-0">
+      <div className="container relative z-20 mx-auto px-4 md:px-6 h-full flex items-center justify-center -mt-5 md:-mt-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
           <motion.div 
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
@@ -229,6 +229,7 @@ export default function Hero({ customImages }: HeroProps = {}) {
                       alt="Hero Showcase"
                       fill
                       priority
+                      unoptimized={heroImages[currentImageIndex]?.toLowerCase().endsWith('.jfif')}
                       sizes="(max-width: 768px) 100vw, 450px"
                       className="object-contain"
                     />
