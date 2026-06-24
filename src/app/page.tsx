@@ -41,6 +41,25 @@ export default async function Home() {
     .select('category, image_url')
     .order('created_at', { ascending: false });
 
+  // Fetch Company Stats
+  const { data: companyStats } = await supabase
+    .from('company_stats')
+    .select('*')
+    .eq('id', 1)
+    .single();
+
+  let finalFeaturedProjects = featuredProjects || [];
+  if (finalFeaturedProjects.length === 0 && galleryDesigns && galleryDesigns.length > 0) {
+    const shuffled = [...galleryDesigns].sort(() => 0.5 - Math.random());
+    finalFeaturedProjects = shuffled.slice(0, 4).map((item, idx) => ({
+      id: `random-fallback-${idx}`,
+      title: item.category || 'Custom Design',
+      description: 'A beautiful laser-cut custom design from our gallery portfolio.',
+      image_url: item.image_url,
+      order_index: idx
+    }));
+  }
+
   const categoryThumbnails: Record<string, string> = {};
   if (galleryDesigns) {
     for (const item of galleryDesigns) {
@@ -53,19 +72,31 @@ export default async function Home() {
     }
   }
 
+  let heroSliderImages = galleryDesigns
+    ?.filter(item => item.category === 'Hero Slider')
+    .map(item => item.image_url)
+    .slice(0, 4) || [];
+
+  // Fallback to latest 4 gallery images if no dedicated hero images exist
+  if (heroSliderImages.length === 0) {
+    heroSliderImages = galleryDesigns
+      ?.map(item => item.image_url)
+      .slice(0, 4) || [];
+  }
+
   return (
     <div className="bg-transparent">
-      <Hero />
+      <Hero customImages={heroSliderImages} />
       <GlowingDivider />
-      <FeaturedProjects projects={featuredProjects || []} />
+      <FeaturedProjects projects={finalFeaturedProjects} />
       <Services categoryThumbnails={categoryThumbnails} />
       <Vision />
-      <MaterialVisualizer />
+      {/* <MaterialVisualizer /> */}
       <GlowingDivider />
       <Projects />
       {/* <Process /> */}
-      <Materials />
-      <Stats />
+      {/* <Materials /> */}
+      <Stats customStats={companyStats} />
       <Testimonials testimonials={testimonials || []} />
       <ContactForm />
     </div>

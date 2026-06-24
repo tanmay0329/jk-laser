@@ -36,7 +36,7 @@ export default function Vision() {
             </h2>
             
             <p className="text-lg md:text-xl text-white/70 font-light leading-relaxed">
-              We envision a future where metal fabrication is not just structural, but a seamless blend of innovation and art. By pushing the boundaries of CNC laser technology, we transform ideas into futuristic elevations and groundbreaking designs.
+              At JK Laser, our vision is to transform modern buildings with innovative laser-cutting designs that create a futuristic architectural appearance.
             </p>
 
             <div className="grid grid-cols-2 gap-6 mt-6">
@@ -83,11 +83,11 @@ export default function Vision() {
               <div className="absolute inset-0 bg-[#1A1500]/60 backdrop-blur-xl rounded-sm border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.15)] flex items-center justify-center">
                 
                 <Image 
-                  src="/images/vision_building.webp" 
+                  src="/images/futuristic_laser_architecture.png" 
                   alt="Futuristic Building Vision" 
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover mix-blend-screen opacity-80 filter contrast-125"
+                  className="object-cover"
                 />
 
                 {/* Animated Overlay Elements */}

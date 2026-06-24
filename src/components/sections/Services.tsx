@@ -93,7 +93,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
           {defaultServices.map((service, index) => {
             const initialX = index % 2 === 0 ? -50 : 50;
             const displayImage = categoryThumbnails[service.title] || service.image;
@@ -102,7 +102,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
               key={service.id}
               initial={{ opacity: 0, x: initialX, y: 20 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: false, amount: 0.1, margin: "0px 0px -50px 0px" }}
               onClick={() => router.push(`/gallery?category=${encodeURIComponent(service.filterName)}`)}
               transition={{ 
                 duration: 0.5, 
@@ -111,9 +111,9 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
                 stiffness: 120,
                 damping: 20
               }}
-              className="group relative flex flex-col bg-[#1A1500]/60 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-colors duration-500 will-change-transform transform-gpu cursor-pointer shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+              className="group relative flex flex-col bg-[#1A1500]/60 backdrop-blur-xl border border-white/5 rounded-xl md:rounded-2xl overflow-hidden hover:border-primary/30 transition-colors duration-500 will-change-transform transform-gpu cursor-pointer shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             >
-              <div className="relative h-48 md:h-64 w-full overflow-hidden flex items-center justify-center">
+              <div className="relative h-32 md:h-64 w-full overflow-hidden flex items-center justify-center">
                 {/* Blurred Background */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
                   <Image
@@ -121,7 +121,7 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
                     alt=""
                     fill
                     unoptimized={displayImage.toLowerCase().endsWith('.jfif')}
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover blur-xl opacity-40 scale-125"
                   />
                 </div>
@@ -135,30 +135,32 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
                   alt={service.title}
                   fill
                   unoptimized={displayImage.toLowerCase().endsWith('.jfif')}
-                  sizes="(max-width: 768px) 100vw, 250px"
+                  sizes="(max-width: 768px) 50vw, 250px"
                   className="z-20 object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] p-2"
                 />
               </div>
               
-              <div className="p-6 flex flex-col grow">
-                <div className="flex items-center gap-3 mb-4 border-b border-white/10 pb-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-black transition-colors duration-300">
-                    <span className="text-lg leading-none">{service.icon}</span>
+              <div className="p-3 md:p-6 flex flex-col grow">
+                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4 border-b border-white/10 pb-2 md:pb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-black transition-colors duration-300">
+                    <span className="text-sm md:text-lg leading-none">{service.icon}</span>
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-white tracking-wide">{service.title}</h3>
+                  <h3 className="font-heading text-xs sm:text-sm md:text-lg font-bold text-white tracking-wide line-clamp-2 md:line-clamp-none">{service.title}</h3>
                 </div>
                 
-                <ul className="flex flex-col gap-2 mb-6 grow">
+                <ul className="flex flex-col gap-1.5 md:gap-2 mb-3 md:mb-6 grow">
                   {service.items.map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-white/80 transition-colors">
-                      <div className="w-1 h-1 rounded-full bg-primary" />
-                      {item}
+                    <li key={i} className={`flex items-center gap-1.5 md:gap-2 text-[10px] sm:text-xs md:text-sm text-muted-foreground group-hover:text-white/80 transition-colors ${i >= 2 ? 'hidden md:flex' : ''}`}>
+                      <div className="w-1 h-1 rounded-full bg-primary shrink-0" />
+                      <span className="line-clamp-1">{item}</span>
                     </li>
                   ))}
                 </ul>
                 
-                <span className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover-gold transition-colors group/btn mt-auto">
-                  View Gallery <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                <span className="inline-flex items-center gap-1 md:gap-2 text-[10px] sm:text-xs md:text-sm text-primary font-semibold hover-gold transition-colors group/btn mt-auto">
+                  <span className="hidden sm:inline">View Gallery</span>
+                  <span className="inline sm:hidden">View</span>
+                  <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform md:w-4 md:h-4" />
                 </span>
               </div>
             </motion.div>

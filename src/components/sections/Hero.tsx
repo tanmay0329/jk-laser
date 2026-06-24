@@ -21,7 +21,7 @@ const Sparkle = ({ delay }: { delay: number }) => (
       delay: delay,
       ease: "easeOut"
     }}
-    className="absolute w-1 h-1 rounded-full bg-[#D4AF37] shadow-[0_0_10px_2px_#D4AF37]"
+    className="absolute w-1 h-1 rounded-full bg-[#D4AF37] shadow-[0_0_10px_2px_#D4AF37] will-change-transform"
     style={{
       left: `${Math.random() * 100}%`,
       bottom: `${Math.random() * 30}%`
@@ -29,19 +29,62 @@ const Sparkle = ({ delay }: { delay: number }) => (
   />
 );
 
-export default function Hero() {
+// Native Fire Animation using Framer Motion
+const FireFlames = ({ mounted }: { mounted: boolean }) => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {/* Intense Ambient Fire Glow spanning the whole background */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#ff3300]/40 via-[#ff8c00]/10 to-transparent blur-[100px]" />
+      
+      {/* Continuous Full-Screen Moving Flames/Particles */}
+      {mounted && Array.from({ length: 60 }).map((_, i) => {
+        const duration = Math.random() * 3 + 2;
+        const delay = Math.random() * 5;
+        const startX = Math.random() * 100;
+        const startY = Math.random() * 100; // Start at random heights across the whole screen
+        return (
+          <motion.div
+            key={`flame-${i}`}
+            initial={{ 
+              opacity: 0, 
+              top: `${startY}%`, 
+              left: `${startX}%`,
+              scale: Math.random() * 2 + 0.5 
+            }}
+            animate={{ 
+              opacity: [0, Math.random() * 0.7 + 0.3, 0], 
+              top: `-${Math.random() * 20 + 20}%`, // Float completely off the top of the screen
+              x: Math.random() * 100 - 50
+            }}
+            transition={{ 
+              duration: duration, 
+              repeat: Infinity, 
+              delay: delay,
+              ease: "linear"
+            }}
+            className="absolute w-16 h-48 rounded-full bg-gradient-to-t from-[#ff0000] via-[#ff5a00] to-transparent blur-[16px] mix-blend-screen"
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+interface HeroProps {
+  customImages?: string[];
+}
+
+export default function Hero({ customImages }: HeroProps = {}) {
   const [mounted, setMounted] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const heroImages = [
+  const heroImages = customImages && customImages.length > 0 ? customImages : [
     "/images/slider/laser_cutting_1.webp",
     "/images/slider/mesh_pattern.webp",
     "/images/slider/laser_cutting_2.webp",
-    "/images/slider/facade_1.webp",
-    "/images/slider/laser_cutting_3.webp",
-    "/images/slider/macro_1.webp"
+    "/images/slider/facade_1.webp"
   ];
-  
+
   useEffect(() => {
     setMounted(true);
     const interval = setInterval(() => {
@@ -50,53 +93,38 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  const { scrollY } = useScroll();
-  const backgroundY = useTransform(scrollY, [0, 1000], ["0%", "50%"]);
-
   return (
-    <section id="hero" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-transparent pt-20 pb-20">
-      {/* Background Video with Overlay */}
-      <motion.div 
-        className="absolute inset-0 z-0 bg-transparent"
-        style={{ y: backgroundY }}
-      >
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover opacity-50 mix-blend-lighten"
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-welder-working-with-sparks-flying-around-34463-large.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-      </motion.div>
+    <section id="hero" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-black pt-20 pb-20">
+      {/* Native CSS Fire Animation Background */}
+      <div className="absolute inset-0 z-0 bg-black">
+        <FireFlames mounted={mounted} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+      </div>
 
-      {/* Gold glowing accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
+      {/* Gold glowing accent - Hidden on mobile to keep pure black background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none hidden md:block" />
 
       {/* Background Watermark Logo */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         {/* Desktop Banner Logo */}
-        <div className="hidden md:block absolute inset-0 opacity-10 mix-blend-overlay">
+        <div className="hidden md:block absolute inset-0 opacity-[0.05]">
           <Image 
             src="/jk-laser-banner.webp" 
             alt="Watermark Desktop" 
             fill
             sizes="100vw"
-            className="object-cover filter grayscale"
+            className="object-cover"
           />
         </div>
         {/* Mobile Background Logo */}
-        <div className="block md:hidden absolute inset-x-0 top-0 w-full h-full opacity-20 pointer-events-none">
+        <div className="block md:hidden absolute inset-x-0 top-0 w-full h-full opacity-10 pointer-events-none">
           <Image 
             src="/verticle_logo.webp" 
             alt="Watermark Mobile" 
             fill
             priority
             sizes="100vw"
-            className="object-cover object-top scale-[1.2] origin-top mix-blend-normal"
+            className="object-cover object-top scale-[1.2] origin-top"
           />
         </div>
       </div>
@@ -111,33 +139,45 @@ export default function Hero() {
       )}
 
       {/* Content */}
-      <div className="container relative z-20 mx-auto px-4 md:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container relative z-20 mx-auto px-4 md:px-6 h-full flex items-center justify-center mt-20 md:mt-0">
+        <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
           <motion.div 
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="flex flex-col gap-6 text-center md:text-left items-center md:items-start"
+            className="flex flex-col gap-6 items-center lg:items-start text-center lg:text-left max-w-5xl mx-auto lg:mx-0"
           >
             <div className="inline-flex items-center gap-2 border border-primary/30 bg-primary/10 rounded-full px-4 py-1.5 w-max backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span className="text-xs font-semibold tracking-widest text-primary uppercase">Premium Metal Fabrication</span>
             </div>
             
-            <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.1] text-white">
-              PRECISION <br />
-              <span className="text-gradient-gold">JK LASER CUTTING</span> <br />
-              & CUSTOM DESIGN
-            </h1>
+            <div 
+              className="relative w-[110%] md:w-full max-w-[800px] mb-4 -ml-4 md:ml-0"
+              style={{
+                WebkitMaskImage: 'radial-gradient(ellipse 95% 95% at 50% 50%, black 70%, transparent 100%)',
+                maskImage: 'radial-gradient(ellipse 95% 95% at 50% 50%, black 70%, transparent 100%)'
+              }}
+            >
+              <Image 
+                src="/jk-laser-firee.png" 
+                alt="JK LASER" 
+                width={800} 
+                height={300} 
+                priority
+                className="w-full h-auto mix-blend-screen"
+              />
+            </div>
             
-            <p className="text-lg md:text-xl text-white/80 max-w-xl font-light leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white/90 italic font-heading mt-2">
+              "We Make What You Think."
+            </h2>
+            
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl font-light leading-relaxed mt-6">
               We create elegant laser-cut gates, railings, decorative panels, name plates and custom metal artwork with unmatched precision and perfect finish.
-              <span className="block mt-4 text-xl md:text-2xl font-semibold text-primary italic font-heading">
-                "JK Laser – We Make What You Think."
-              </span>
             </p>
             
-            <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 mt-4 w-full md:w-auto">
+            <div className="flex flex-wrap justify-center lg:justify-start items-center gap-6 mt-8 w-full">
               <Link href="/gallery" className="group relative inline-flex items-center justify-center gap-2 bg-gradient-gold text-black px-8 py-4 rounded-full font-bold text-sm tracking-wide overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.6)] hover:scale-105">
                 <span className="relative z-10 flex items-center gap-2">
                   VIEW DESIGNS <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -155,7 +195,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.2 }}
-            className="flex justify-center perspective-[1000px] mt-24 lg:mt-0"
+            className="flex justify-center perspective-[1000px] mt-16 lg:mt-0"
           >
             {/* 3D Floating Element */}
             <motion.div
@@ -190,7 +230,7 @@ export default function Hero() {
                       fill
                       priority
                       sizes="(max-width: 768px) 100vw, 450px"
-                      className="object-cover"
+                      className="object-contain"
                     />
                   </motion.div>
                 </AnimatePresence>

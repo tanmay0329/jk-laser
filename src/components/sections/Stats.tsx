@@ -5,7 +5,7 @@ import { useInView, animate, motion } from "framer-motion";
 
 function Counter({ from, to, duration, suffix = "" }: { from: number, to: number, duration: number, suffix?: string }) {
   const nodeRef = useRef<HTMLSpanElement>(null);
-  const inView = useInView(nodeRef, { once: true });
+  const inView = useInView(nodeRef, { once: false });
 
   useEffect(() => {
     if (!inView && nodeRef.current) {
@@ -29,14 +29,21 @@ function Counter({ from, to, duration, suffix = "" }: { from: number, to: number
   return <span ref={nodeRef} className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-primary">{from}{suffix}</span>;
 }
 
-const stats = [
-  { value: 847, suffix: "+", label: "DESIGNS", duration: 2.5 },
-  { value: 1352, suffix: "+", label: "HAPPY CLIENTS", duration: 3 },
-  { value: 14, suffix: "+", label: "YEARS EXPERIENCE", duration: 2 },
-  { value: 99, suffix: "%", label: "SATISFACTION", duration: 2.5 },
-];
+export interface CompanyStats {
+  designs_count: number;
+  projects_count: number;
+  clients_count: number;
+  experience_years: number;
+}
 
-export default function Stats() {
+export default function Stats({ customStats }: { customStats?: CompanyStats | null }) {
+  const dynamicStats = [
+    { value: customStats?.designs_count ?? 350, suffix: "+", label: "DESIGNS", duration: 2.5 },
+    { value: customStats?.projects_count ?? 150, suffix: "+", label: "PROJECTS", duration: 2.5 },
+    { value: customStats?.clients_count ?? 120, suffix: "+", label: "HAPPY CLIENTS", duration: 2.5 },
+    { value: customStats?.experience_years ?? 5, suffix: "+", label: "YEARS EXPERIENCE", duration: 2 },
+  ];
+
   return (
     <section className="py-16 bg-transparent border-y border-white/10 relative overflow-hidden">
       {/* Decorative lines */}
@@ -46,12 +53,12 @@ export default function Stats() {
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 text-center">
-          {stats.map((stat, index) => (
+          {dynamicStats.map((stat, index) => (
             <motion.div 
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col items-center justify-center"
             >

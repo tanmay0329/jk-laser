@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Star, Pencil, Trash, Plus, X } from 'lucide-react'
-import { addReview, deleteReview } from './actions'
+import { addReview, deleteReview, updateReview } from './actions'
 
 export interface Review {
   id: string
@@ -14,9 +14,22 @@ export interface Review {
 
 export default function ReviewsClient({ initialReviews }: { initialReviews: Review[] }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [editingReview, setEditingReview] = useState<Review | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [error, setError] = useState('')
+
+  async function handleUpdate(formData: FormData) {
+    setIsLoading(true)
+    setError('')
+    const result = await updateReview(formData)
+    setIsLoading(false)
+    if (result.success) {
+      setEditingReview(null)
+    } else {
+      setError(result.message || 'Failed to update review')
+    }
+  }
 
   async function handleAdd(formData: FormData) {
     setIsLoading(true)
@@ -79,21 +92,72 @@ export default function ReviewsClient({ initialReviews }: { initialReviews: Revi
                 <h4 className="font-bold text-white">{review.name}</h4>
                 <p className="text-primary text-xs uppercase tracking-wide">{review.company}</p>
               </div>
-              <div className="flex justify-end gap-3 mt-4 border-t border-white/5 pt-4">
+              <div className="flex justify-between items-center mt-4 border-t border-white/5 pt-4">
+                <button 
+                  onClick={() => setEditingReview(review)} 
+                  className="text-primary/70 hover:text-primary transition-colors flex items-center gap-2 text-sm font-medium"
+                >
+                  <Pencil size={14} />
+                  Edit
+                </button>
                 <button 
                   onClick={() => handleDelete(review.id)} 
                   disabled={deletingId === review.id}
-                  className="text-red-500/50 hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  className="text-red-500/50 hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium"
                 >
                   {deletingId === review.id ? (
                     <span className="text-xs uppercase tracking-wider font-bold">Deleting...</span>
                   ) : (
-                    <Trash size={16} />
+                    <>
+                      <Trash size={14} />
+                      Delete
+                    </>
                   )}
                 </button>
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Edit Modal */}
+      {editingReview && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+          <div className="bg-[#121212] border border-white/10 rounded-xl w-full max-w-lg p-6 relative">
+            <button onClick={() => setEditingReview(null)} className="absolute top-4 right-4 text-white/50 hover:text-white">
+              <X size={20} />
+            </button>
+            <h2 className="font-heading text-2xl font-bold text-white mb-6">Edit Review</h2>
+            
+            <form action={handleUpdate} className="flex flex-col gap-4">
+              <input type="hidden" name="id" value={editingReview.id} />
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider text-white/60 mb-1 block">Client Name</label>
+                <input required name="name" defaultValue={editingReview.name} className="w-full bg-black border border-white/20 rounded-md px-4 py-2 text-white focus:border-primary focus:outline-none" />
+              </div>
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider text-white/60 mb-1 block">Company / Role (Optional)</label>
+                <input name="company" defaultValue={editingReview.company} className="w-full bg-black border border-white/20 rounded-md px-4 py-2 text-white focus:border-primary focus:outline-none" />
+              </div>
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider text-white/60 mb-1 block">Review Text</label>
+                <textarea required name="text" rows={4} defaultValue={editingReview.text} className="w-full bg-black border border-white/20 rounded-md px-4 py-2 text-white focus:border-primary focus:outline-none"></textarea>
+              </div>
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider text-white/60 mb-1 block">Rating (1-5)</label>
+                <input required type="number" min="1" max="5" defaultValue={editingReview.rating} name="rating" className="w-full bg-black border border-white/20 rounded-md px-4 py-2 text-white focus:border-primary focus:outline-none" />
+              </div>
+              
+              {error && <p className="text-red-500 text-sm">{error}</p>}
+              
+              <div className="flex justify-end gap-3 mt-4">
+                <button type="button" onClick={() => setEditingReview(null)} className="px-4 py-2 text-white/70 hover:text-white">Cancel</button>
+                <button type="submit" disabled={isLoading} className="bg-primary text-black font-bold px-6 py-2 rounded-md hover:bg-white transition-colors disabled:opacity-50">
+                  {isLoading ? 'Saving...' : 'Save Changes'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 

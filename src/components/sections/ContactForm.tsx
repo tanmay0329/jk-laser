@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { UploadCloud, PenLine, ChevronDown } from "lucide-react";
+import { PenLine, ChevronDown } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -167,15 +167,6 @@ ${formData.message}`;
                     className="w-full bg-[#120F00]/60 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 md:py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors resize-none"
                     placeholder="Tell us about your requirements..."
                   ></textarea>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[10px] md:text-xs uppercase tracking-wider text-white/70 font-semibold">Reference Images</label>
-                  <div className="w-full border border-primary/20 bg-primary/5 rounded-sm p-4 md:p-6 flex flex-col items-center justify-center text-center">
-                    <UploadCloud className="w-8 h-8 text-primary mb-2" />
-                    <p className="text-xs md:text-sm text-white/80 font-medium mb-1">Have reference images or drawings?</p>
-                    <p className="text-[10px] md:text-xs text-white/50">You can easily attach them directly in the WhatsApp chat after clicking submit!</p>
-                  </div>
                 </div>
 
                 <button 
