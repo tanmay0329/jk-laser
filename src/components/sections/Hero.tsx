@@ -94,7 +94,7 @@ export default function Hero({ customImages }: HeroProps = {}) {
   }, [heroImages.length]);
 
   return (
-    <section id="hero" className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-black pt-0 pb-20">
+    <section id="hero" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-black pt-20 pb-20">
       {/* Native CSS Fire Animation Background */}
       <div className="absolute inset-0 z-0 bg-black">
         <FireFlames mounted={mounted} />
@@ -117,14 +117,14 @@ export default function Hero({ customImages }: HeroProps = {}) {
           />
         </div>
         {/* Mobile Background Logo */}
-        <div className="block md:hidden absolute inset-x-0 top-0 w-full h-[120vh] opacity-10 pointer-events-none">
+        <div className="block md:hidden absolute inset-x-0 top-0 w-full h-full opacity-10 pointer-events-none">
           <Image 
             src="/verticle_logo.webp" 
             alt="Watermark Mobile" 
             fill
             priority
             sizes="100vw"
-            className="object-cover object-top origin-top"
+            className="object-cover object-top scale-[1.2] origin-top"
           />
         </div>
       </div>
