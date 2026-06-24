@@ -30,14 +30,15 @@ const Sparkle = ({ delay }: { delay: number }) => (
 );
 
 // Native Fire Animation using Framer Motion
-const FireFlames = ({ mounted }: { mounted: boolean }) => {
+const FireFlames = ({ mounted, isMobile }: { mounted: boolean, isMobile: boolean }) => {
+  const flameCount = isMobile ? 15 : 60;
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {/* Intense Ambient Fire Glow spanning the whole background */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#ff3300]/40 via-[#ff8c00]/10 to-transparent blur-[100px]" />
       
       {/* Continuous Full-Screen Moving Flames/Particles */}
-      {mounted && Array.from({ length: 60 }).map((_, i) => {
+      {mounted && Array.from({ length: flameCount }).map((_, i) => {
         const duration = Math.random() * 3 + 2;
         const delay = Math.random() * 5;
         const startX = Math.random() * 100;
@@ -77,6 +78,7 @@ interface HeroProps {
 export default function Hero({ customImages }: HeroProps = {}) {
   const [mounted, setMounted] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const heroImages = customImages && customImages.length > 0 ? customImages : [
     "/images/slider/laser_cutting_1.webp",
@@ -87,17 +89,26 @@ export default function Hero({ customImages }: HeroProps = {}) {
 
   useEffect(() => {
     setMounted(true);
+    
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
     }, 4000);
-    return () => clearInterval(interval);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', checkMobile);
+    };
   }, [heroImages.length]);
 
   return (
     <section id="hero" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-black pt-20 pb-20">
       {/* Native CSS Fire Animation Background */}
       <div className="absolute inset-0 z-0 bg-black">
-        <FireFlames mounted={mounted} />
+        <FireFlames mounted={mounted} isMobile={isMobile} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
       </div>
 
@@ -132,7 +143,7 @@ export default function Hero({ customImages }: HeroProps = {}) {
       {/* Sparks */}
       {mounted && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-          {Array.from({ length: 20 }).map((_, i) => (
+          {Array.from({ length: isMobile ? 5 : 20 }).map((_, i) => (
             <Sparkle key={i} delay={Math.random() * 5} />
           ))}
         </div>
@@ -160,7 +171,7 @@ export default function Hero({ customImages }: HeroProps = {}) {
               }}
             >
               <Image 
-                src="/jk-laser-firee.png" 
+                src="/jk-laser-firee.webp" 
                 alt="JK LASER" 
                 width={800} 
                 height={300} 
