@@ -114,6 +114,7 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
                     src={item.image_url}
                     alt={item.title}
                     fill
+                    unoptimized={item.image_url.toLowerCase().endsWith('.jfif')}
                     sizes="(max-width: 768px) 50vw, 25vw"
                     className="object-contain transition-transform duration-700 group-hover:scale-110"
                   />
@@ -161,6 +162,7 @@ export default function FeaturedProjects({ projects = [] }: FeaturedProjectsProp
                   src={selectedProject.image_url} 
                   alt={selectedProject.title} 
                   fill
+                  unoptimized={selectedProject.image_url.toLowerCase().endsWith('.jfif')}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-contain drop-shadow-2xl p-4"
                 />
