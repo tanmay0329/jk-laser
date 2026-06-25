@@ -105,9 +105,14 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} JK Laser Beed. All rights reserved.
-          </p>
+          <div className="flex flex-col gap-1 items-center md:items-start text-center md:text-left">
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} JK Laser Beed. All rights reserved.
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Powered by <a href="https://www.praisearray.org/" target="_blank" rel="noopener noreferrer" className="hover-gold transition-colors">PraiseArray</a>
+            </p>
+          </div>
           <div className="flex gap-4">
             <Link href="#" className="text-xs text-muted-foreground hover-gold transition-colors">Privacy Policy</Link>
             <Link href="#" className="text-xs text-muted-foreground hover-gold transition-colors">Terms of Service</Link>
