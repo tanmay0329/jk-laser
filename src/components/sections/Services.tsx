@@ -59,10 +59,14 @@ const defaultServices = [
 
 interface ServicesProps {
   categoryThumbnails?: Record<string, string>;
+  catalogs?: any[];
 }
 
-export default function Services({ categoryThumbnails = {} }: ServicesProps) {
+export default function Services({ categoryThumbnails = {}, catalogs = [] }: ServicesProps) {
   const router = useRouter();
+  
+  // Use dynamic catalogs if available, otherwise fallback to defaults
+  const displayServices = catalogs.length > 0 ? catalogs : defaultServices;
 
   return (
     <section id="services" className="py-24 bg-transparent relative border-b border-white/5 overflow-hidden">
@@ -94,16 +98,18 @@ export default function Services({ categoryThumbnails = {} }: ServicesProps) {
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
-          {defaultServices.map((service, index) => {
+          {displayServices.map((service, index) => {
             const initialX = index % 2 === 0 ? -50 : 50;
-            const displayImage = categoryThumbnails[service.title] || service.image;
+            // Prioritize the image explicitly set in the Admin Panel (service.image_url) over the dynamic gallery sync
+            const displayImage = service.image_url || categoryThumbnails[service.title] || service.image;
+            const filterName = service.filter_name || service.filterName;
             return (
             <motion.div
               key={service.id}
               initial={{ opacity: 0, x: initialX, y: 20 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: false, amount: 0.1, margin: "0px 0px -50px 0px" }}
-              onClick={() => router.push(`/gallery?category=${encodeURIComponent(service.filterName)}`)}
+              onClick={() => router.push(`/gallery?category=${encodeURIComponent(filterName)}`)}
               transition={{ 
                 duration: 0.5, 
                 delay: index * 0.1,

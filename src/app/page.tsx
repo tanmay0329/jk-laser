@@ -48,6 +48,12 @@ export default async function Home() {
     .eq('id', 1)
     .single();
 
+  // Fetch Dynamic Catalogs
+  const { data: catalogs } = await supabase
+    .from('catalogs')
+    .select('*')
+    .order('order_index', { ascending: true });
+
   let finalFeaturedProjects = featuredProjects || [];
   if (finalFeaturedProjects.length === 0 && galleryDesigns && galleryDesigns.length > 0) {
     const shuffled = [...galleryDesigns].sort(() => 0.5 - Math.random());
@@ -89,7 +95,7 @@ export default async function Home() {
       <Hero customImages={heroSliderImages} />
       <GlowingDivider />
       <FeaturedProjects projects={finalFeaturedProjects} />
-      <Services categoryThumbnails={categoryThumbnails} />
+      <Services categoryThumbnails={categoryThumbnails} catalogs={catalogs || []} />
       <Vision />
       {/* <MaterialVisualizer /> */}
       <GlowingDivider />

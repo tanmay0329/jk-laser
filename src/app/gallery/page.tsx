@@ -17,6 +17,13 @@ export default async function GalleryPage() {
     .select('*')
     .order('created_at', { ascending: false });
 
+  const { data: catalogs } = await supabase
+    .from('catalogs')
+    .select('filter_name')
+    .order('order_index', { ascending: true });
+
+  const categories = catalogs ? catalogs.map(c => c.filter_name) : [];
+
   // Map to the format DesignGallery expects
   const formattedImages = (galleryImages || []).map(img => {
     const isJfif = img.image_url.toLowerCase().endsWith('.jfif');
@@ -41,7 +48,7 @@ export default async function GalleryPage() {
       </div>
       {/* Spacer for navbar */}
       <div className="h-10"></div>
-      <DesignGallery initialItems={formattedImages} />
+      <DesignGallery initialItems={formattedImages} categories={categories} />
     </div>
   );
 }

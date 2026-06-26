@@ -1,7 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import { logout } from '../login/actions'
-import { LayoutDashboard, Image as ImageIcon, LayoutTemplate, Star, MonitorPlay, BarChart3 } from 'lucide-react'
+import { LayoutDashboard, Image as ImageIcon, LayoutTemplate, Star, MonitorPlay, BarChart3, FolderTree } from 'lucide-react'
 import { LogoutButton } from './LogoutButton'
 
 export default async function DashboardLayout({
@@ -34,6 +34,10 @@ export default async function DashboardLayout({
           <Link href="/admin/featured" className="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-md transition-colors">
             <LayoutTemplate size={18} />
             <span className="font-medium text-sm">Featured Projects</span>
+          </Link>
+          <Link href="/admin/catalogs" className="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-md transition-colors">
+            <FolderTree size={18} />
+            <span className="font-medium text-sm">Catalogs (Categories)</span>
           </Link>
           <Link href="/admin/hero" className="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-md transition-colors">
             <MonitorPlay size={18} />

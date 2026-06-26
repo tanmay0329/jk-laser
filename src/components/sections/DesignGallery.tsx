@@ -14,9 +14,10 @@ export interface GalleryItem {
 
 interface DesignGalleryProps {
   initialItems?: GalleryItem[];
+  categories?: string[];
 }
 
-const categories = [
+const defaultCategories = [
   "All", 
   "JK Building Elevation Design", 
   "JK Elevation Design", 
@@ -27,7 +28,7 @@ const categories = [
 ];
 const ITEMS_PER_PAGE = 20;
 
-export default function DesignGallery({ initialItems = [] }: DesignGalleryProps) {
+export default function DesignGallery({ initialItems = [], categories = [] }: DesignGalleryProps) {
   const [filter, setFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [lightboxImage, setLightboxImage] = useState<{url: string, number: string, ratio?: string} | null>(null);
@@ -82,11 +83,12 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const categoryParam = params.get("category");
-      if (categoryParam && categories.includes(categoryParam)) {
+      const activeCategories = ["All", ...(categories.length > 0 ? categories : defaultCategories.filter(c => c !== "All"))];
+      if (categoryParam && activeCategories.includes(categoryParam)) {
         setFilter(categoryParam);
       }
     }
-  }, []);
+  }, [categories]);
 
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -172,7 +174,7 @@ export default function DesignGallery({ initialItems = [] }: DesignGalleryProps)
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-5xl mx-auto mb-16">
             {/* Category Filter */}
             <div className="flex flex-wrap items-center justify-center gap-2">
-              {categories.map((cat) => (
+              {["All", ...(categories.length > 0 ? categories : defaultCategories.filter(c => c !== "All"))].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => handleFilterChange(cat)}

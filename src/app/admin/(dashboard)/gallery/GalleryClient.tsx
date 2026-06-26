@@ -11,14 +11,15 @@ export interface GalleryDesign {
   image_url: string
 }
 
-export default function GalleryClient({ initialDesigns }: { initialDesigns: GalleryDesign[] }) {
+export default function GalleryClient({ initialDesigns, categories = [] }: { initialDesigns: GalleryDesign[], categories?: string[] }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [preview, setPreview] = useState<string | null>(null)
 
-  const categories = [
+  // If no dynamic categories are provided, fall back to the defaults (or just use an empty array if preferred, but fallback is safer)
+  const availableCategories = categories.length > 0 ? categories : [
     "JK Building Elevation Design", 
     "JK Elevation Design", 
     "JK Door", 
@@ -161,7 +162,7 @@ export default function GalleryClient({ initialDesigns }: { initialDesigns: Gall
                 <div>
                   <label className="text-xs font-bold uppercase tracking-wider text-white/60 mb-1 block">Category</label>
                   <select required name="category" className="w-full bg-black border border-white/20 rounded-md px-4 py-2.5 text-white focus:border-primary focus:outline-none appearance-none">
-                    {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                    {availableCategories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
                   </select>
                 </div>
                 <div>
