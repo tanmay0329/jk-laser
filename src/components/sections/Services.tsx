@@ -6,7 +6,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const defaultServices = [
+interface CatalogItem {
+  id: string;
+  title: string;
+  filterName?: string;
+  filter_name?: string;
+  image?: string;
+  image_url?: string;
+  items: string[];
+  icon: string;
+}
+
+const defaultServices: CatalogItem[] = [
   {
     id: "building-elevation",
     title: "JK BUILDING ELEVATION DESIGN",
@@ -57,17 +68,6 @@ const defaultServices = [
   },
 ];
 
-interface CatalogItem {
-  id: string;
-  title: string;
-  filterName?: string;
-  filter_name?: string;
-  image?: string;
-  image_url?: string;
-  items: string[];
-  icon: string;
-}
-
 interface ServicesProps {
   categoryThumbnails?: Record<string, string>;
   catalogs?: CatalogItem[];
@@ -112,8 +112,8 @@ export default function Services({ categoryThumbnails = {}, catalogs = [] }: Ser
           {displayServices.map((service, index) => {
             const initialX = index % 2 === 0 ? -50 : 50;
             // Prioritize the image explicitly set in the Admin Panel (service.image_url) over the dynamic gallery sync
-            const displayImage = service.image_url || categoryThumbnails[service.title] || service.image;
-            const filterName = service.filter_name || service.filterName;
+            const displayImage = service.image_url || categoryThumbnails[service.title] || service.image || "";
+            const filterName = service.filter_name || service.filterName || "";
             return (
             <motion.div
               key={service.id}
