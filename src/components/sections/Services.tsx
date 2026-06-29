@@ -57,9 +57,20 @@ const defaultServices = [
   },
 ];
 
+interface CatalogItem {
+  id: string;
+  title: string;
+  filterName?: string;
+  filter_name?: string;
+  image?: string;
+  image_url?: string;
+  items: string[];
+  icon: string;
+}
+
 interface ServicesProps {
   categoryThumbnails?: Record<string, string>;
-  catalogs?: any[];
+  catalogs?: CatalogItem[];
 }
 
 export default function Services({ categoryThumbnails = {}, catalogs = [] }: ServicesProps) {
